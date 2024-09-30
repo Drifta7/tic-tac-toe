@@ -13,5 +13,22 @@ namespace tic_tac_toe
             PlayerChoice_x,
             PlayerChoice_o
         }
+
+
+        public enum playerPostion
+        {
+            topLeftCorner = 1,
+            topMiddleCorner = 2,
+            topRightConer,
+
+            midLeft,
+            midCenter,
+            midRight,
+
+            bottomLeftCorner,
+            bottomMiddleCorner,
+            bottomRightConer,
+        }
     }
+
 }
