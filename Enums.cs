@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace tic_tac_toe
 {
-    public class Enums
+    public static class Enums
     {
         public enum playerChoice
         {
@@ -15,19 +15,19 @@ namespace tic_tac_toe
         }
 
 
-        public enum playerPostion
+        public enum playerPostion // the numbers are designated for the spaces for the grid
         {
             topLeftCorner = 1,
             topMiddleCorner = 2,
-            topRightConer,
+            topRightConer = 3,
 
-            midLeft,
-            midCenter,
-            midRight,
+            midLeft = 4,
+            midCenter = 5,
+            midRight = 6,
 
-            bottomLeftCorner,
-            bottomMiddleCorner,
-            bottomRightConer,
+            bottomLeftCorner = 7,
+            bottomMiddleCorner = 8,
+            bottomRightConer = 9,
         }
     }
 
