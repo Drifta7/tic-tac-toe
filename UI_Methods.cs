@@ -14,41 +14,57 @@ namespace tic_tac_toe
             Console.WriteLine("Choose X's or O's ");
         } // generic display message
 
-        public static string userInput = Console.ReadLine();// will use this as an argument for playerSelection() method
 
-        public static void clearGridForNewInput()
+        public static string UserSelectMark() // dont use this
+        {
+            string userInput = Console.ReadLine();// will use this as an argument for playerSelection() method
+            int wrongEntry;
+            if (int.TryParse(userInput, out wrongEntry))
+            {
+                Console.WriteLine($"this is worked {userInput} has been parsed");
+            }
+            else
+            {
+                Console.WriteLine("please enter a valid entry ");
+            }
+            // use TryParse here
+            return userInput;
+        }
+
+        public static void ClearGridForNewInput()
         {
             Console.Clear();
+            Console.WriteLine("Please hit Enter To Continue......");
             Console.ReadKey();
 
-            Console.WriteLine("Please hit Enter To Continue......");
-        }
-        public static string playerSelection(string userEntry)
+        }// clears grid
+        public static string DecidePlayerSymbol(string userEntry)
         {
-            string playerChoice_X = "x";
-            string playerChoice_O = "o";
-
-            if (userEntry == playerChoice_X)
+            
+            if (userEntry == GameConstants.PLAYERCHOICE_X)
             {
                 Console.WriteLine("Player has selected : x");
                 Console.WriteLine();
             }
 
-            if (userEntry == playerChoice_O)
+            if (userEntry == GameConstants.PLAYERCHOICE_O)
             {
                 Console.WriteLine("player has selected : o ");
+                Console.WriteLine();
             }
             else
                 Console.WriteLine(" please select a mark");
 
             return userEntry;
         }
+       
         // this method should be established as when the user has put in their mark
         // and also when the user and the computer switch turns
-        public static string switchPlayerTurnAndCpu(string userInput)
+
+        public static string switchPlayerTurnAndCpu(string userInput) //rewrite this over and make it make sense 
         {
-            userInput = Console.ReadLine(); // 
-            bool playerTurnSwitch = false;
+
+            bool playerTurnSwitch = false; // put this into a while loop then figure out the logical flow or soemthing
             if (userInput == "x")
             {
                 playerTurnSwitch = true;
@@ -85,43 +101,43 @@ namespace tic_tac_toe
 
 
 
-        public static void positionChecks(int userInput, int[,] ArrayPos)
-        {
-            if (userPlay == Enums.playerPostion.topLeftCorner)
-            {
-                ArrayPos[0,0] = userInput;
-            }
+        //public static void positionChecks(int userInput, int[,] ArrayPos)
+        //{
+        //    if (userPlay == PlayerPosition.topLeftCorner)
+        //    {
+        //        ArrayPos[0, 0] = userInput;
+        //    }
 
-            if (userPlay == Enums.playerPostion.topMiddleCorner)
-            {
-                ArrayPos[0, 1] = userInput;
-            }
-            if (userPlay == Enums.playerPostion.topRightConer)
-            {
-                ArrayPos[0, 2] = userInput;
-            }
-            if (userplay == Enums.playerPostion.midLeft)
-            {
-                ArrayPos[1, 0] = userInput;
-            }
-            
-            if (userplay == Enums.playerPostion.midCenter)
-            {
-                ArrayPos[1, 1] = userInput;
-            }
-            if (userPlay == Enums.playerPostion.midRight)
-            {
-                ArrayPos[1, 2] = userInput; 
-            }
-            if (userplay == Enums.playerPostion.bottomLeftCorner)
-            {
-                ArrayPos[2, 0] = userInput;
-            }
-            if (userPlay == Enums.playerPostion.bottomMiddleCorner)
-            {
-                ArrayPos[2, 1] = userInput;
-            }
+        //    if (userPlay == PlayerPosition.topMiddleCorner)
+        //    {
+        //        ArrayPos[0, 1] = userInput;
+        //    }
+        //    if (userPlay == PlayerPosition.topRightConer)
+        //    {
+        //        ArrayPos[0, 2] = userInput;
+        //    }
+        //    if (userplay == PlayerPosition.midLeft)
+        //    {
+        //        ArrayPos[1, 0] = userInput;
+        //    }
 
-        }
+        //    if (userplay == PlayerPosition.midCenter)
+        //    {
+        //        ArrayPos[1, 1] = userInput;
+        //    }
+        //    if (userPlay == PlayerPosition.midRight)
+        //    {
+        //        ArrayPos[1, 2] = userInput;
+        //    }
+        //    if (userplay == PlayerPosition.bottomLeftCorner)
+        //    {
+        //        ArrayPos[2, 0] = userInput;
+        //    }
+        //    if (userPlay == PlayerPosition.bottomMiddleCorner)
+        //    {
+        //        ArrayPos[2, 1] = userInput;
+        //    }
+
     }
 }
+

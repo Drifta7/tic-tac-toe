@@ -15,19 +15,12 @@ namespace tic_tac_toe
         }
 
 
-        public enum playerPostion // the numbers are designated for the spaces for the grid
-        {
-            topLeftCorner = 1,
-            topMiddleCorner = 2,
-            topRightConer = 3,
+      
 
-            midLeft = 4,
-            midCenter = 5,
-            midRight = 6,
-
-            bottomLeftCorner = 7,
-            bottomMiddleCorner = 8,
-            bottomRightConer = 9,
+        public enum PositionCheck
+        { 
+        
+        
         }
     }
 

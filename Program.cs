@@ -7,14 +7,14 @@ namespace tic_tac_toe
     {
         static void Main(string[] args)
         {
-            const string PLAYER_CHOICE_X = "x";
-            const string PLayer_CHOICE_O = "o";
+           
+            
             UI_Methods.DisplayWelcomeMessage();
 
-            UI_Methods.playerSelection(UI_Methods.userInput);
+            UI_Methods.DecidePlayerSymbol(UI_Methods.UserSelectMark());
 
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
-            string[,] ticTacToeGrid = new string[gameConstants.NUMBER_OF_ROWS, gameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid //use this for to display the chart
+            string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid //use this for to display the chart
 
             for (int rows = 0; rows < ticTacToeGrid.GetLength(0); rows++) // this is for 
             {
@@ -25,11 +25,23 @@ namespace tic_tac_toe
                 Console.WriteLine();
             }
            
-            UI_Methods.clearGridForNewInput(); // clears the grids
+            UI_Methods.switchPlayerTurnAndCpu(UI_Methods.UserSelectMark()); // might have to change this later the: UserSelectMark()
+            UI_Methods.ClearGridForNewInput(); // clears the grids
             
-            string[,] secondGrid;
-            secondGrid = new string[gameConstants.NUMBER_OF_ROWS, gameConstants.NUMBER_OF_COLUMNS];
+            string[,] TicTacToeSecondGrid;
+            TicTacToeSecondGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS];
+
+            for (int rows = 0; rows < TicTacToeSecondGrid.GetLength(0); rows++)
+            {
+                for (int cols = 0; cols < TicTacToeSecondGrid.GetLength(1); cols++)
+                {
+                    //??
+                }
+                Console.WriteLine();
+            }
+            
             /// think about if this needs to be in a nested for loop or something else
+            
         }
     }
 }
