@@ -15,19 +15,9 @@ namespace tic_tac_toe
         } // generic display message
 
 
-        public static string UserSelectMark() // dont use this
+        public static string UserSelectMark() 
         {
             string userInput = Console.ReadLine();// will use this as an argument for playerSelection() method
-            int wrongEntry;
-            if (int.TryParse(userInput, out wrongEntry))
-            {
-                Console.WriteLine($"this is worked {userInput} has been parsed");
-            }
-            else
-            {
-                Console.WriteLine("please enter a valid entry ");
-            }
-            // use TryParse here
             return userInput;
         }
 
@@ -40,6 +30,23 @@ namespace tic_tac_toe
         }// clears grid
         public static string DecidePlayerSymbol(string userEntry)
         {
+            bool isTheEntryCorrect = false;
+            do
+            {
+                
+                int wrongEntry;
+                if (int.TryParse(UserSelectMark(), out wrongEntry))
+                {
+                    Console.WriteLine($"this is worked {UserSelectMark()} has been parsed"); // testing purposes
+                    isTheEntryCorrect = true;
+                }
+                else
+                {
+                    Console.WriteLine("please enter a valid entry ");
+                    UserSelectMark();
+                }
+            }
+            while (!isTheEntryCorrect);
             
             if (userEntry == GameConstants.PLAYERCHOICE_X)
             {
@@ -57,7 +64,7 @@ namespace tic_tac_toe
 
             return userEntry;
         }
-       
+
         // this method should be established as when the user has put in their mark
         // and also when the user and the computer switch turns
 
