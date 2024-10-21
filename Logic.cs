@@ -8,6 +8,6 @@ namespace tic_tac_toe
 {
     class Logic
     {
-        // here use a while loop for the game logic
+        
     }
 }

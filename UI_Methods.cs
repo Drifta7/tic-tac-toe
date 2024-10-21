@@ -15,8 +15,9 @@ namespace tic_tac_toe
         } // generic display message
 
 
-        public static string UserSelectMark() 
+        public static string UserSelectMark()
         {
+
             string userInput = Console.ReadLine();// will use this as an argument for playerSelection() method
             return userInput;
         }
@@ -28,41 +29,38 @@ namespace tic_tac_toe
             Console.ReadKey();
 
         }// clears grid
-        public static string DecidePlayerSymbol(string userEntry)
+        public static string DecidePlayerSymbol()
         {
-            bool isTheEntryCorrect = false;
+            bool isTheSelectionValid = false;
+            string PlayerEntryCheck = UI_Methods.UserSelectMark();
             do
             {
-                
-                int wrongEntry;
-                if (int.TryParse(UserSelectMark(), out wrongEntry))
-                {
-                    Console.WriteLine($"this is worked {UserSelectMark()} has been parsed"); // testing purposes
-                    isTheEntryCorrect = true;
-                }
-                else
-                {
-                    Console.WriteLine("please enter a valid entry ");
-                    UserSelectMark();
-                }
-            }
-            while (!isTheEntryCorrect);
-            
-            if (userEntry == GameConstants.PLAYERCHOICE_X)
-            {
-                Console.WriteLine("Player has selected : x");
-                Console.WriteLine();
-            }
 
-            if (userEntry == GameConstants.PLAYERCHOICE_O)
-            {
-                Console.WriteLine("player has selected : o ");
-                Console.WriteLine();
-            }
-            else
-                Console.WriteLine(" please select a mark");
+                if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X)
+                {
+                    isTheSelectionValid = true;
+                    Console.WriteLine("Player has selected : x");
+                    Console.WriteLine();
+                    break;
+                }
 
-            return userEntry;
+                if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_O)
+                {
+                    isTheSelectionValid = true;
+                    Console.WriteLine("player has selected : o ");
+                    Console.WriteLine();
+                    break;
+                }
+                if (PlayerEntryCheck != GameConstants.PLAYERCHOICE_O || PlayerEntryCheck != GameConstants.PLAYERCHOICE_X)
+                {
+                    Console.WriteLine(" ERROR incorrect Entry :please select a mark");
+                    isTheSelectionValid = false;
+                    PlayerEntryCheck = UI_Methods.UserSelectMark();
+                }
+            }
+            while (!isTheSelectionValid);
+
+            return PlayerEntryCheck;
         }
 
         // this method should be established as when the user has put in their mark

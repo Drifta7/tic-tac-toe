@@ -11,7 +11,7 @@ namespace tic_tac_toe
             
             UI_Methods.DisplayWelcomeMessage();
 
-            UI_Methods.DecidePlayerSymbol(UI_Methods.UserSelectMark());
+            string playerSmybol = UI_Methods.DecidePlayerSymbol();
 
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
             string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid //use this for to display the chart
