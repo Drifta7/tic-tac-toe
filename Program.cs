@@ -11,7 +11,7 @@ namespace tic_tac_toe
             
             UI_Methods.DisplayWelcomeMessage();
 
-            string playerSmybol = UI_Methods.DecidePlayerSymbol();
+            string playerSymbol = UI_Methods.DecidePlayerSymbol();// stores the Symbol selection in a variable
 
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
             string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid //use this for to display the chart
@@ -39,7 +39,12 @@ namespace tic_tac_toe
                 }
                 Console.WriteLine();
             }
-            
+            int playerMarker;
+            int cpuMarker;
+            bool isPlayerTurn = false;
+
+           // while () ;
+
             /// think about if this needs to be in a nested for loop or something else
             
         }

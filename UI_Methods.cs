@@ -36,21 +36,14 @@ namespace tic_tac_toe
             do
             {
 
-                if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X)
+                if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X || PlayerEntryCheck == GameConstants.PLAYERCHOICE_O)
                 {
                     isTheSelectionValid = true;
-                    Console.WriteLine("Player has selected : x");
+                    Console.WriteLine($"Player has selected {PlayerEntryCheck}");
                     Console.WriteLine();
                     break;
                 }
 
-                if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_O)
-                {
-                    isTheSelectionValid = true;
-                    Console.WriteLine("player has selected : o ");
-                    Console.WriteLine();
-                    break;
-                }
                 if (PlayerEntryCheck != GameConstants.PLAYERCHOICE_O || PlayerEntryCheck != GameConstants.PLAYERCHOICE_X)
                 {
                     Console.WriteLine(" ERROR incorrect Entry :please select a mark");
@@ -83,6 +76,36 @@ namespace tic_tac_toe
 
             return userInput;
         }
+        public static void GridPositions(int[,] GridArrayPos) // this Method establishes the locations of where the player and cpu puts their marks
+        {
+            GridArrayPos[0, 0] = (int)PlayerPosition.playerPostion.topLeftCorner; // this was cast with an (int) because of an error when inplementing the positions  =P
+            GridArrayPos[0, 1] = (int)PlayerPosition.playerPostion.topMiddleCorner;
+            GridArrayPos[0, 2] = (int)PlayerPosition.playerPostion.topRightConer;
+
+            //////////////////////////////////////////////////////////////////////
+
+            GridArrayPos[1, 0] = (int)PlayerPosition.playerPostion.midLeft;
+            GridArrayPos[1, 1] = (int)PlayerPosition.playerPostion.midCenter;
+            GridArrayPos[1, 2] = (int)PlayerPosition.playerPostion.midRight;
+
+            ///////////////////////////////////////////////////////////////////
+
+            GridArrayPos[2, 0] = (int)PlayerPosition.playerPostion.bottomLeftCorner;
+            GridArrayPos[2, 1] = (int)PlayerPosition.playerPostion.bottomMiddleCorner;
+            GridArrayPos[2, 2] = (int)PlayerPosition.playerPostion.bottomRightConer;
+        }
+
+        public static void PlayerMarkPosition()
+        {
+            int getPlayerPosition = Convert.ToInt32(Console.ReadLine());// player inputs number for position... i think lol 
+            //if (getPlayerPosition == UI_Methods.GridPositions())
+            {
+                
+            }
+            // get the input to match up with the enums "something == something"
+            // make something like where the player press a number on the keyboard and then his/her mark is selected put on the tic-tac-toe grid
+            // or something within the lines of that
+        }
 
 
         //public static bool MakeDescision()// probably will not use this
@@ -105,15 +128,14 @@ namespace tic_tac_toe
         }
 
 
-
         //public static void positionChecks(int userInput, int[,] ArrayPos)
         //{
-        //    if (userPlay == PlayerPosition.topLeftCorner)
+        //    if (UI_Methods.DecidePlayerSymbol() == PlayerPosition.playerPostion.topLeftCorner)
         //    {
         //        ArrayPos[0, 0] = userInput;
         //    }
 
-        //    if (userPlay == PlayerPosition.topMiddleCorner)
+        //    if (UI_Methods.DecidePlayerSymbol() == PlayerPosition.topMiddleCorner)
         //    {
         //        ArrayPos[0, 1] = userInput;
         //    }
@@ -143,6 +165,7 @@ namespace tic_tac_toe
         //        ArrayPos[2, 1] = userInput;
         //    }
 
+        //}
     }
 }
 
