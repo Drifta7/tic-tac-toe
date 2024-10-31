@@ -13,6 +13,8 @@ namespace tic_tac_toe
 
             string playerSymbol = UI_Methods.DecidePlayerSymbol();// stores the Symbol selection in a variable
 
+            
+
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
             string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid //use this for to display the chart
 
@@ -27,6 +29,8 @@ namespace tic_tac_toe
            
             UI_Methods.switchPlayerTurnAndCpu(UI_Methods.UserSelectMark()); // might have to change this later the: UserSelectMark()
             UI_Methods.ClearGridForNewInput(); // clears the grids
+            
+            UI_Methods.GridPositions(ticTacToeGrid[GameConstants.NUMBER_OF_ROWS,GameConstants.NUMBER_OF_COLUMNS]); // error
             
             string[,] TicTacToeSecondGrid;
             TicTacToeSecondGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS];
