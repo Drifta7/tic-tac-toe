@@ -26,11 +26,12 @@ namespace tic_tac_toe
                 }
                 Console.WriteLine();
             }
-           
+           ///////////// Display the Grid////////////////////////////
+         
             UI_Methods.switchPlayerTurnAndCpu(UI_Methods.UserSelectMark()); // might have to change this later the: UserSelectMark()
             UI_Methods.ClearGridForNewInput(); // clears the grids
             
-            UI_Methods.GridPositions(ticTacToeGrid); // the ticTacToeGridarray passes into the GridPositions() to substitute the "player mark" for the "-"
+            UI_Methods.PlayerMarkPositionOnGrid(ticTacToeGrid, playerSymbol); // the ticTacToeGridarray passes into the GridPositions() to substitute the "player mark" for the "-"
             
             string[,] TicTacToeSecondGrid;
             TicTacToeSecondGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS];

@@ -46,7 +46,7 @@ namespace tic_tac_toe
 
                 if (PlayerEntryCheck != GameConstants.PLAYERCHOICE_O || PlayerEntryCheck != GameConstants.PLAYERCHOICE_X)
                 {
-                    Console.WriteLine(" ERROR incorrect Entry :please select a mark");
+                    Console.WriteLine(" ERROR Incorrect Entry! :please select either 'O' or 'X' mark");
                     isTheSelectionValid = false;
                     PlayerEntryCheck = UI_Methods.UserSelectMark();
                 }
@@ -76,9 +76,9 @@ namespace tic_tac_toe
 
             return userInput;
         }
-        public static void GridPositions(string[,] gridArrayPos) // this Method establishes the locations of where the player and cpu puts their marks// change the name of method
+        public static void PlayerMarkPositionOnGrid(string[,] gridArrayPos, string playerMark) // this Method establishes the locations of where the player and cpu (maybe) puts their marks// change the name of method
         {
-            Console.WriteLine("PLace your mark in the grid");
+            Console.WriteLine("Place your mark in the grid");
             string getPlayerPosition = Console.ReadLine();
 
             //// this establishes the positions of the value of the enums and will match the vaules with user input to place the player mark//////
@@ -102,65 +102,53 @@ namespace tic_tac_toe
             /////////checks/////////
             if (getPlayerPosition == gridArrayPos[0, 0])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 1");// for testing purposes, replace these messages with player
             }
             if (getPlayerPosition == gridArrayPos[0, 1])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 2");
             }
 
             if (getPlayerPosition == gridArrayPos[0, 2])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 3");
             }
             if (getPlayerPosition == gridArrayPos[1, 0])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 4");
             }
             if (getPlayerPosition == gridArrayPos[1, 1])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 5");
             }
             if (getPlayerPosition == gridArrayPos[1, 2])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 6");
             }
             if (getPlayerPosition == gridArrayPos[2, 0])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 7");
             }
             if (getPlayerPosition == gridArrayPos[2, 1])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 8");
             }
             if (getPlayerPosition == gridArrayPos[2, 2])
             {
+                Console.WriteLine(playerMark);
                 Console.WriteLine("the user had marked something on gridspace 9");
             }
 
         }
 
-        public static void PlayerMarkPositionOnGrid(int[,] gridArrayPos)
-        {
-
-            // get the input to match up with the enums "something == something"
-            // make something like where the player press a number on the keyboard and then his/her mark is selected put on the tic-tac-toe grid
-            // or something within the lines of that
-        }
-
-
-        //public static bool MakeDescision()// probably will not use this
-        //{
-        //    Console.WriteLine("do you want to continue with this whatever?");
-        //    if (Console.ReadLine() == "y")
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
         public static int winGameCheck()
         {
             throw new NotImplementedException();
@@ -169,44 +157,7 @@ namespace tic_tac_toe
         }
 
 
-        //public static void positionChecks(int userInput, int[,] ArrayPos)
-        //{
-        //    if (UI_Methods.DecidePlayerSymbol() == PlayerPosition.playerPostion.topLeftCorner)
-        //    {
-        //        ArrayPos[0, 0] = userInput;
-        //    }
-
-        //    if (UI_Methods.DecidePlayerSymbol() == PlayerPosition.topMiddleCorner)
-        //    {
-        //        ArrayPos[0, 1] = userInput;
-        //    }
-        //    if (userPlay == PlayerPosition.topRightConer)
-        //    {
-        //        ArrayPos[0, 2] = userInput;
-        //    }
-        //    if (userplay == PlayerPosition.midLeft)
-        //    {
-        //        ArrayPos[1, 0] = userInput;
-        //    }
-
-        //    if (userplay == PlayerPosition.midCenter)
-        //    {
-        //        ArrayPos[1, 1] = userInput;
-        //    }
-        //    if (userPlay == PlayerPosition.midRight)
-        //    {
-        //        ArrayPos[1, 2] = userInput;
-        //    }
-        //    if (userplay == PlayerPosition.bottomLeftCorner)
-        //    {
-        //        ArrayPos[2, 0] = userInput;
-        //    }
-        //    if (userPlay == PlayerPosition.bottomMiddleCorner)
-        //    {
-        //        ArrayPos[2, 1] = userInput;
-        //    }
-
-        //}
+       
     }
 }
 
