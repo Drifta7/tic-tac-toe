@@ -30,7 +30,7 @@ namespace tic_tac_toe
             UI_Methods.switchPlayerTurnAndCpu(UI_Methods.UserSelectMark()); // might have to change this later the: UserSelectMark()
             UI_Methods.ClearGridForNewInput(); // clears the grids
             
-            UI_Methods.GridPositions(ticTacToeGrid[GameConstants.NUMBER_OF_ROWS,GameConstants.NUMBER_OF_COLUMNS]); // error
+            UI_Methods.GridPositions(ticTacToeGrid); // the ticTacToeGridarray passes into the GridPositions() to substitute the "player mark" for the "-"
             
             string[,] TicTacToeSecondGrid;
             TicTacToeSecondGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS];
@@ -39,7 +39,7 @@ namespace tic_tac_toe
             {
                 for (int cols = 0; cols < TicTacToeSecondGrid.GetLength(1); cols++)
                 {
-                    //??
+                    //Console.WriteLine((TicTacToeSecondGrid[rows,cols]= )); // in this line get reference from methos and store in a variable then put into this line 
                 }
                 Console.WriteLine();
             }

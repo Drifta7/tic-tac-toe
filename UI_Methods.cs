@@ -29,7 +29,7 @@ namespace tic_tac_toe
             Console.ReadKey();
 
         }// clears grid
-        public static string DecidePlayerSymbol()  // this is when the useer selects the mark 
+        public static string DecidePlayerSymbol()  // this is when the user selects the mark 
         {
             bool isTheSelectionValid = false;
             string PlayerEntryCheck = UI_Methods.UserSelectMark();
@@ -39,7 +39,7 @@ namespace tic_tac_toe
                 if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X || PlayerEntryCheck == GameConstants.PLAYERCHOICE_O)
                 {
                     isTheSelectionValid = true;
-                    Console.WriteLine($"Player has selected {PlayerEntryCheck}");
+                    Console.WriteLine($"Player has selected: {PlayerEntryCheck}");
                     Console.WriteLine();
                     break;
                 }
@@ -76,11 +76,13 @@ namespace tic_tac_toe
 
             return userInput;
         }
-        public static void GridPositions(string[,] gridArrayPos) // this Method establishes the locations of where the player and cpu puts their marks
+        public static void GridPositions(string[,] gridArrayPos) // this Method establishes the locations of where the player and cpu puts their marks// change the name of method
         {
-
+            Console.WriteLine("PLace your mark in the grid");
             string getPlayerPosition = Console.ReadLine();
 
+            //// this establishes the positions of the value of the enums and will match the vaules with user input to place the player mark//////
+           
             gridArrayPos[0, 0] = ((int)playerPostion.topLeftCorner).ToString(); // this was cast with an (int) because of an error when inplementing the positions  =P
             gridArrayPos[0, 1] = ((int)playerPostion.topMiddleCorner).ToString();
             gridArrayPos[0, 2] = ((int)playerPostion.topRightConer).ToString();
@@ -97,10 +99,10 @@ namespace tic_tac_toe
             gridArrayPos[2, 1] = ((int)playerPostion.bottomMiddleCorner).ToString();
             gridArrayPos[2, 2] = ((int)playerPostion.bottomRightConer).ToString();
 
-            ////// ///checks/////////
+            /////////checks/////////
             if (getPlayerPosition == gridArrayPos[0, 0])
             {
-                Console.WriteLine("the user had marked something on gridspace 1");// for testing purposes 
+                Console.WriteLine("the user had marked something on gridspace 1");// for testing purposes, replace these messages with player
             }
             if (getPlayerPosition == gridArrayPos[0, 1])
             {
@@ -135,7 +137,7 @@ namespace tic_tac_toe
             {
                 Console.WriteLine("the user had marked something on gridspace 9");
             }
-           
+
         }
 
         public static void PlayerMarkPositionOnGrid(int[,] gridArrayPos)
