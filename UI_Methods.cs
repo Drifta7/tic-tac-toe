@@ -76,13 +76,17 @@ namespace tic_tac_toe
 
             return userInput;
         }
+
         public static void PlayerMarkPositionOnGrid(string[,] gridArrayPos, string playerMark) // this Method establishes the locations of where the player and cpu (maybe) puts their marks// change the name of method
         {
             Console.WriteLine("Place your mark in the grid");
-            string getPlayerPosition = Console.ReadLine();
+           
+            string placePlayerPosition = Console.ReadLine();
+                
+            int playerPositionInput = int.Parse(placePlayerPosition); // converts playerInput into an integer which will match up with enum values
 
             //// this establishes the positions of the value of the enums and will match the vaules with user input to place the player mark//////
-           
+
             gridArrayPos[0, 0] = ((int)playerPostion.topLeftCorner).ToString(); // this was cast with an (int) because of an error when inplementing the positions  =P
             gridArrayPos[0, 1] = ((int)playerPostion.topMiddleCorner).ToString();
             gridArrayPos[0, 2] = ((int)playerPostion.topRightConer).ToString();
@@ -97,67 +101,56 @@ namespace tic_tac_toe
 
             gridArrayPos[2, 0] = ((int)playerPostion.bottomLeftCorner).ToString();
             gridArrayPos[2, 1] = ((int)playerPostion.bottomMiddleCorner).ToString();
-            gridArrayPos[2, 2] = ((int)playerPostion.bottomRightConer).ToString();
+            gridArrayPos[2, 2] = ((int)playerPostion.bottomRightCorner).ToString();
 
             /////////checks/////////
-            if (getPlayerPosition == gridArrayPos[0, 0])
+            if (playerPositionInput == (int)playerPostion.topLeftCorner) // when player chooses 1 the player mark will be put into position
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 1");// for testing purposes, replace these messages with player
+                gridArrayPos[0, 0] = playerMark;
             }
-            if (getPlayerPosition == gridArrayPos[0, 1])
+            if (playerPositionInput == (int)playerPostion.topMiddleCorner)
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 2");
+                gridArrayPos[0, 1] = playerMark;
             }
-
-            if (getPlayerPosition == gridArrayPos[0, 2])
+            if (playerPositionInput == (int)playerPostion.topRightConer)
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 3");
+                gridArrayPos[0, 2] = playerMark;
             }
-            if (getPlayerPosition == gridArrayPos[1, 0])
+            if (playerPositionInput == (int)playerPostion.midLeft)
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 4");
+                gridArrayPos[1, 0] = playerMark;
             }
-            if (getPlayerPosition == gridArrayPos[1, 1])
+            if (playerPositionInput == (int)playerPostion.midCenter)
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 5");
+                gridArrayPos[1, 1] = playerMark;
             }
-            if (getPlayerPosition == gridArrayPos[1, 2])
+            if (playerPositionInput == (int)playerPostion.midRight)
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 6");
+                gridArrayPos[1, 2] = playerMark;
             }
-            if (getPlayerPosition == gridArrayPos[2, 0])
+            if (playerPositionInput == (int)playerPostion.bottomLeftCorner)
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 7");
+                gridArrayPos[2, 0] = playerMark;
             }
-            if (getPlayerPosition == gridArrayPos[2, 1])
+            if (playerPositionInput == (int)playerPostion.bottomMiddleCorner)
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 8");
+                gridArrayPos[2, 1] = playerMark;
             }
-            if (getPlayerPosition == gridArrayPos[2, 2])
+            if (playerPositionInput == (int)playerPostion.bottomRightCorner)
             {
-                Console.WriteLine(playerMark);
-                Console.WriteLine("the user had marked something on gridspace 9");
+                gridArrayPos[2, 2] = playerMark;
             }
-
         }
 
         public static int winGameCheck()
         {
             throw new NotImplementedException();
-            // this will check if the user or the computer has won
+            // this will check if the user or thxe computer has won
             // if (user or computer )
         }
 
 
-       
+
     }
 }
 

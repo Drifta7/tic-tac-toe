@@ -19,7 +19,7 @@ namespace tic_tac_toe
 
         bottomLeftCorner = 7,
         bottomMiddleCorner = 8,
-        bottomRightConer = 9,
+        bottomRightCorner = 9,
     }
 
 
