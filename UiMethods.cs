@@ -17,7 +17,20 @@ namespace tic_tac_toe
             string userInput = Console.ReadLine();// will use this as an argument for playerSelection() method
             return userInput;
         }
+        public static void DisplayTicTacToeGrid()
+        {
+            //////// this is to diplay the tic-tac-toe grid//////////////////////////
+            string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid //use this for to display the chart
 
+            for (int rows = 0; rows < ticTacToeGrid.GetLength(0); rows++) // this is for 
+            {
+                for (int cols = 0; cols < ticTacToeGrid.GetLength(1); cols++)
+                {
+                    Console.Write((ticTacToeGrid[rows, cols] = " - "));
+                }
+                Console.WriteLine();
+            }
+        }
         public static void ClearGridForNewInput()
         {
             Console.Clear();
@@ -158,7 +171,7 @@ namespace tic_tac_toe
             {
                 if (int.TryParse(placePlayerPosition, out gridRange)) // this will catch the Player input to see if the input is in range 
                 {
-                    if (gridRange < GameConstants.HIGH || gridRange > GameConstants.LOW)
+                    if (gridRange >= GameConstants.LOW && gridRange <= GameConstants.HIGH)
                     {
                         Console.WriteLine("Entry is within range ,space has been selected ");
                         isTheEntryWithinRange = true;
@@ -169,6 +182,15 @@ namespace tic_tac_toe
                 }
 
             } while (!isTheEntryWithinRange);
+
+            //if (ticTacToeGrid[row, columns] == PLAYERCHOICE_X || ticTacToe[row, columns] == PLAYERCHOICE_O) // checks if the space is valid for playerMark entry 
+            //{
+            //    Console.WriteLine("this space is already occupied, Please select another");
+            //}
+            //else
+            //{
+            //    ticTacToe[row, columns] = PlayerMark;
+            //}
         }
 
         public static int winGameCheck()
