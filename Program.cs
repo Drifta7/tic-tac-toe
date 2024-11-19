@@ -15,7 +15,17 @@ namespace tic_tac_toe
 
             UiMethods.DisplayTicTacToeGrid();
 
-           
+            ////////// this is to diplay the tic-tac-toe grid//////////////////////////
+            //string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid //use this for to display the chart
+
+            //for (int rows = 0; rows < ticTacToeGrid.GetLength(0); rows++) // this is for 
+            //{
+            //    for (int cols = 0; cols < ticTacToeGrid.GetLength(1); cols++)
+            //    {
+            //        Console.Write((ticTacToeGrid[rows, cols] = " - "));
+            //    }
+            //    Console.WriteLine();
+            //}
 
             UiMethods.switchPlayerTurnAndCpu(UiMethods.UserSelectMark()); // might have to change this later the: UserSelectMark()
             UiMethods.ClearGridForNewInput(); // clears the grids

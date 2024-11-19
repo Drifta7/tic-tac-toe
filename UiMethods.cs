@@ -54,7 +54,7 @@ namespace tic_tac_toe
                     break;
                 }
 
-                if (PlayerEntryCheck != GameConstants.PLAYERCHOICE_O || PlayerEntryCheck != GameConstants.PLAYERCHOICE_X)
+                if (PlayerEntryCheck != GameConstants.PLAYERCHOICE_X && PlayerEntryCheck != GameConstants.PLAYERCHOICE_O)
                 {
                     Console.WriteLine(" ERROR Incorrect Entry! :please select either 'O' or 'X' mark");
                     isTheSelectionValid = false;
@@ -183,15 +183,31 @@ namespace tic_tac_toe
 
             } while (!isTheEntryWithinRange);
 
-            //if (ticTacToeGrid[row, columns] == PLAYERCHOICE_X || ticTacToe[row, columns] == PLAYERCHOICE_O) // checks if the space is valid for playerMark entry 
-            //{
-            //    Console.WriteLine("this space is already occupied, Please select another");
-            //}
-            //else
-            //{
-            //    ticTacToe[row, columns] = PlayerMark;
-            //}
         }
+        //////// Method checks///////
+        /// <summary>
+        ///  This is to Check for Validation for player Entry in the Grid for TicTacToeDisplay
+        /// </summary>
+        /// <param name="Grid">Enter a string array</param>
+        /// <param name="rowNum">Enter the NUMBEROFROWS from GameConstants</param>
+        /// <param name="colNum">Enter the NUMBERORCOLOUMNS from GameConstants</param>
+        /// <param name="Playersymbol"> Enter PLAYERCHOICE_X</param>
+        /// <param name="Playersymbol2">Enter PLAYERCHOICE_O</param>
+        /// <param name="PlayerMark"> Enter DecidePlayerSymbol() method</param>
+       
+        public static void CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark)
+        {
+
+            if (Grid[rowNum, colNum] == Playersymbol || Grid[rowNum, colNum] == Playersymbol2) // checks if the space is valid for playerMark entry 
+            {
+                Console.WriteLine("this space is already occupied, Please select another");
+            }
+            else
+            {
+                Grid[rowNum, colNum] = PlayerMark; // this is line is to place the player mark into the Grid
+            }
+        }
+
 
         public static int winGameCheck()
         {
