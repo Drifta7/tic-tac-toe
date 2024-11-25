@@ -14,7 +14,7 @@ namespace tic_tac_toe
         public const int NUMBER_OF_ROWS = 3;
         public const int NUMBER_OF_COLUMNS = 3;
 
-        public const string PLAYERCHOICE_X = "x"; 
+        public const string PLAYERCHOICE_X   = "x"; 
         public const string PLAYERCHOICE_O = "o"; 
 
 

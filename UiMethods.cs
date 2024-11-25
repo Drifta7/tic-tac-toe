@@ -26,11 +26,13 @@ namespace tic_tac_toe
             {
                 for (int cols = 0; cols < ticTacToeGrid.GetLength(1); cols++)
                 {
-                    Console.Write((ticTacToeGrid[rows, cols] = " - "));
+                    Console.Write(ticTacToeGrid[rows, cols] = " - ");
                 }
                 Console.WriteLine();
             }
         }
+
+
         public static void ClearGridForNewInput()
         {
             Console.Clear();
@@ -57,12 +59,11 @@ namespace tic_tac_toe
                 if (PlayerEntryCheck != GameConstants.PLAYERCHOICE_X && PlayerEntryCheck != GameConstants.PLAYERCHOICE_O)
                 {
                     Console.WriteLine(" ERROR Incorrect Entry! :please select either 'O' or 'X' mark");
-                    isTheSelectionValid = false;
                     PlayerEntryCheck = UiMethods.UserSelectMark();
                 }
             }
             while (!isTheSelectionValid);
-
+            
             return PlayerEntryCheck;
         }
 
@@ -78,85 +79,15 @@ namespace tic_tac_toe
                 playerTurnSwitch = true;
                 Console.WriteLine("It is the Player 2 turn");
             }
-            if (userInput != "x")
+            else if (userInput != "x")
             {
-                playerTurnSwitch = false;
                 Console.WriteLine("it is the Computer's turn");
             }
 
             return userInput;
         }
 
-        public static void PlayerMarkPositionOnGrid(string[,] gridArrayPos, string playerMark) // this Method establishes the locations of where the player and cpu (maybe) puts their marks// change the name of method
-        {
-            Console.WriteLine("Place your mark in the grid, use a value between 1-9"); // prompt the user 
 
-            string placePlayerPosition = Console.ReadLine();
-
-            int playerPositionInput = int.Parse(placePlayerPosition); // converts playerInput into an integer which will match up with enum values
-
-
-
-            // potential Line  if([index] == GameConstants.PLAYERCHOICE_O || [index] == GameConstants.PLAYERCHOICE_X)
-            //{
-            // PLAYERWHATEEVR == [INDEX];
-            //}
-            //// this establishes the positions of the value of the enums and will match the vaules with user input to place the player mark//////
-
-            gridArrayPos[0, 0] = ((int)playerPosition.topLeftCorner).ToString(); // this was cast with an (int) because of an error when inplementing the positions  =P
-            gridArrayPos[0, 1] = ((int)playerPosition.topMiddleCorner).ToString();
-            gridArrayPos[0, 2] = ((int)playerPosition.topRightConer).ToString();
-
-            //////////////////////////////////////////////////////////////////////
-
-            gridArrayPos[1, 0] = ((int)playerPosition.midLeft).ToString();
-            gridArrayPos[1, 1] = ((int)playerPosition.midCenter).ToString();
-            gridArrayPos[1, 2] = ((int)playerPosition.midRight).ToString();
-
-            /////////////////////////////////////////////////////////////////////
-
-            gridArrayPos[2, 0] = ((int)playerPosition.bottomLeftCorner).ToString();
-            gridArrayPos[2, 1] = ((int)playerPosition.bottomMiddleCorner).ToString();
-            gridArrayPos[2, 2] = ((int)playerPosition.bottomRightCorner).ToString();
-
-            /////////checks/////////
-            if (playerPositionInput == (int)playerPosition.topLeftCorner) // when player chooses 1 the player mark will be put into position
-            {
-                gridArrayPos[0, 0] = playerMark;
-            }
-            if (playerPositionInput == (int)playerPosition.topMiddleCorner)
-            {
-                gridArrayPos[0, 1] = playerMark;
-            }
-            if (playerPositionInput == (int)playerPosition.topRightConer)
-            {
-                gridArrayPos[0, 2] = playerMark;
-            }
-            if (playerPositionInput == (int)playerPosition.midLeft)
-            {
-                gridArrayPos[1, 0] = playerMark;
-            }
-            if (playerPositionInput == (int)playerPosition.midCenter)
-            {
-                gridArrayPos[1, 1] = playerMark;
-            }
-            if (playerPositionInput == (int)playerPosition.midRight)
-            {
-                gridArrayPos[1, 2] = playerMark;
-            }
-            if (playerPositionInput == (int)playerPosition.bottomLeftCorner)
-            {
-                gridArrayPos[2, 0] = playerMark;
-            }
-            if (playerPositionInput == (int)playerPosition.bottomMiddleCorner)
-            {
-                gridArrayPos[2, 1] = playerMark;
-            }
-            if (playerPositionInput == (int)playerPosition.bottomRightCorner)
-            {
-                gridArrayPos[2, 2] = playerMark;
-            }
-        }
         public static void PlacingPlayerEntryOnGrid() // this might have to replace the PlayerMarkPositionOnGrid() method 
         {
             Random rng = new Random(); // random seed
@@ -184,6 +115,8 @@ namespace tic_tac_toe
             } while (!isTheEntryWithinRange);
 
         }
+
+
         //////// Method checks///////
         /// <summary>
         ///  This is to Check for Validation for player Entry in the Grid for TicTacToeDisplay
@@ -194,7 +127,9 @@ namespace tic_tac_toe
         /// <param name="Playersymbol"> Enter PLAYERCHOICE_X</param>
         /// <param name="Playersymbol2">Enter PLAYERCHOICE_O</param>
         /// <param name="PlayerMark"> Enter DecidePlayerSymbol() method</param>
-       
+
+
+        // this Function will check to see if the space on the grid is already occupi
         public static void CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark)
         {
 
@@ -208,7 +143,97 @@ namespace tic_tac_toe
             }
         }
 
+        public static void CpuAI()
+        {   // use a random "seed" for when there are no matches from the players mark
+            // when player selects mark place the Cpu's mark in this function for check when player has 2 makrs in a row or column ( a block)
+        }
 
+
+        /////////////////////////////////Checks for Player Position///////////////////////////////////////
+        public static void RowsCheck(string[,] Grid)
+        {
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            {
+                string checkPlayerMarkMatch = Grid[rows, 0];
+                bool PlayerAllMatch = true;
+
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    if (Grid[rows, cols] != checkPlayerMarkMatch)
+                    {
+                        PlayerAllMatch = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public static void CenterLineCheck(string[,] Grid)
+        {
+            string firstCenterValue = Grid[0, 1];
+            bool CenterArrayMatches = true;
+
+            for (int i = 0; i < Grid.GetLength(1); i++)
+            {
+                if (Grid[1, i] != firstCenterValue)
+                {
+                    CenterArrayMatches = false;
+                    break;
+                }
+
+            }
+        }
+
+        public static void ColoumnsCheck(string[,] Grid)
+        {
+            bool numberHasMatched = false;
+            for (int cols = 0; cols < Grid.GetLength(0); cols++)
+            {
+                string checkEqualNUmbers = Grid[0, cols];// the first element to compare to
+                bool allMatched = true;
+
+                for (int rows = 0; rows < Grid.GetLength(1); rows++)
+                {
+                    if (Grid[rows, cols] != checkEqualNUmbers)
+                    {
+                        allMatched = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public static void TopLeftDiagonalCheck(string[,] Grid)
+        {
+            string firstDiagonalValue = Grid[0, 0]; // change into an int
+            bool allDiagonalMatch = true;
+
+            for (int i = 0; i < Grid.GetLength(0); i++)
+            {
+                if (Grid[i, i] != firstDiagonalValue)
+                {
+                    allDiagonalMatch = false;
+                    break;
+                }
+            }
+        }
+
+        public static void TopRightDiaginalCheck(string[,] Grid)
+        {
+            string firstDiagValue = Grid[0, 0];
+            bool allDiagMatch = true;
+
+            for (int i = 0; i < Grid.GetLength(0); i++)
+            {
+                if (Grid[i, Grid.GetLength(1) - 1 - i] != firstDiagValue)
+                {
+                    allDiagMatch = false;
+                    break;
+                }
+
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////
         public static int winGameCheck()
         {
             throw new NotImplementedException();
