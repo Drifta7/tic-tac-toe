@@ -11,7 +11,7 @@ namespace tic_tac_toe
         public static string [,] DisplayTicTacToeGrid()
         {
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
-            string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid //use this for to display the chart
+            string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid 
 
             for (int rows = 0; rows < ticTacToeGrid.GetLength(0); rows++) // this is for 
             {
@@ -44,7 +44,6 @@ namespace tic_tac_toe
         /// <param name="Playersymbol2">Enter PLAYERCHOICE_O</param>
         /// <param name="PlayerMark"> Enter DecidePlayerSymbol() method</param>
 
-
         // this Function will check to see if the space on the grid is already occupied
         public static void CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark)
         {
@@ -55,7 +54,7 @@ namespace tic_tac_toe
             }
             else
             {
-                Grid[rowNum, colNum] = PlayerMark; // this is line is to place the player mark into the Grid
+                Grid[rowNum, colNum] = PlayerMark; // this is line is to place the player mark into the Grid (whether human or CPU)
             }
         }
 
@@ -63,10 +62,11 @@ namespace tic_tac_toe
         {
 
             bool playerTurnSwitch = false; // put this into a while loop then figure out the logical flow or soemthing
+            
             if (userInput == GameConstants.PLAYERCHOICE_X)
             {
                 playerTurnSwitch = true;
-                Console.WriteLine("It is the Player 2 turn");
+                Console.WriteLine("It is the Player 1 turn");
             }
             else if (userInput != "x")
             {

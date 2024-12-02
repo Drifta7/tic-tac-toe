@@ -17,17 +17,15 @@ namespace tic_tac_toe
 
                 UiMethods.PlacingPlayerEntryOnGrid();
 
-                Logic.SwitchPlayerAndCpuTurns(UiMethods.UserSelectMark()); // might have to change this later the: UserSelectMark()
+                Logic.SwitchPlayerAndCpuTurns(UiMethods.UserSelectedMark()); // might have to change this later the: UserSelectMark()
                                                                            // Cpu check(s) will follow
 
                 Logic.CheckForValidInputSymbolInGrid(Logic.DisplayTicTacToeGrid(),GameConstants.NUMBER_OF_ROWS,GameConstants.NUMBER_OF_COLUMNS,GameConstants.PLAYERCHOICE_X,GameConstants.PLAYERCHOICE_O,UiMethods.DecidePlayerSymbol());
 
                 Logic.ClearGridForNewInput(); // clears the grids
+
             }
-            while (true); // actual condition not implemented yet
-
-
-
+            while (true); // actual condition not implemented yet.
 
         }
     }
