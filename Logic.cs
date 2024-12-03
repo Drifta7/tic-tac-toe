@@ -45,9 +45,10 @@ namespace tic_tac_toe
         /// <param name="PlayerMark"> Enter DecidePlayerSymbol() method</param>
 
         // this Function will check to see if the space on the grid is already occupied
-        public static void CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark)
+        public static bool CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark) // (originally void)
         {
-
+            bool isTheSpaceOccupied = true; // set to true
+          
             if (Grid[rowNum, colNum] == Playersymbol || Grid[rowNum, colNum] == Playersymbol2) // checks if the space is valid for playerMark entry 
             {
                 Console.WriteLine("this space is already occupied, Please select another");
@@ -55,7 +56,9 @@ namespace tic_tac_toe
             else
             {
                 Grid[rowNum, colNum] = PlayerMark; // this is line is to place the player mark into the Grid (whether human or CPU)
+                 isTheSpaceOccupied = false;
             }
+            return isTheSpaceOccupied;
         }
 
         public static string SwitchPlayerAndCpuTurns(string userInput) //rewrite this over and make it make sense 

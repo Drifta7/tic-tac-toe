@@ -20,7 +20,7 @@ namespace tic_tac_toe
                 Logic.SwitchPlayerAndCpuTurns(UiMethods.UserSelectedMark()); // might have to change this later the: UserSelectMark()
                                                                            // Cpu check(s) will follow
 
-                Logic.CheckForValidInputSymbolInGrid(Logic.DisplayTicTacToeGrid(),GameConstants.NUMBER_OF_ROWS,GameConstants.NUMBER_OF_COLUMNS,GameConstants.PLAYERCHOICE_X,GameConstants.PLAYERCHOICE_O,UiMethods.DecidePlayerSymbol());
+                Logic.CheckForValidInputSymbolInGrid(Logic.DisplayTicTacToeGrid(),GameConstants.NUMBER_OF_ROWS,GameConstants.NUMBER_OF_COLUMNS,GameConstants.PLAYERCHOICE_X,GameConstants.PLAYERCHOICE_O,UiMethods.  DecidePlayerSymbol());
 
                 Logic.ClearGridForNewInput(); // clears the grids
 
