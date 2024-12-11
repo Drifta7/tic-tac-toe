@@ -23,7 +23,7 @@ namespace tic_tac_toe
                 Logic.CheckForValidInputSymbolInGrid(Logic.DisplayTicTacToeGrid(),GameConstants.NUMBER_OF_ROWS,GameConstants.NUMBER_OF_COLUMNS,GameConstants.PLAYERCHOICE_X,GameConstants.PLAYERCHOICE_O,UiMethods.  DecidePlayerSymbol());
 
                 Logic.ClearGridForNewInput(); // clears the grids
-
+                // idead! = if  the usermakr for CheckForValidInputSymbolInGrid is true then use that to switch to the other user, then test it out
             }
             while (true); // actual condition not implemented yet.
 

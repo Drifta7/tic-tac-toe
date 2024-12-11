@@ -8,7 +8,7 @@ namespace tic_tac_toe
 {
     class Logic
     {
-        public static string [,] DisplayTicTacToeGrid()
+        public static string[,] DisplayTicTacToeGrid()
         {
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
             string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid 
@@ -45,27 +45,33 @@ namespace tic_tac_toe
         /// <param name="PlayerMark"> Enter DecidePlayerSymbol() method</param>
 
         // this Function will check to see if the space on the grid is already occupied
-        public static bool CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark) // (originally void)
+        public static bool CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark) // (originally void) boolean was already set to true
         {
-            bool isTheSpaceOccupied = true; // set to true
-          
+            // this check that the userinoput is in bounds of the Grid anything outside will cause an error
+            if (rowNum < 0 || rowNum >= Grid.GetLength(0) || colNum < 0 || colNum >= Grid.GetLength(1))
+            {
+                Console.WriteLine("Invaild Position, Please select a vaild position");
+                return true;
+            }
+
             if (Grid[rowNum, colNum] == Playersymbol || Grid[rowNum, colNum] == Playersymbol2) // checks if the space is valid for playerMark entry 
             {
                 Console.WriteLine("this space is already occupied, Please select another");
             }
-            else
+            if (Grid[rowNum, colNum] == "_") // checks where in the grid the 'placeHolder' is
             {
-                Grid[rowNum, colNum] = PlayerMark; // this is line is to place the player mark into the Grid (whether human or CPU)
-                 isTheSpaceOccupied = false;
+                Grid[rowNum, colNum] = PlayerMark; // this is line to place the player mark into the Grid (whether human or CPU)
+                return false;
             }
-            return isTheSpaceOccupied;
+            Console.WriteLine(" Unexpected Error ");
+            return true;
         }
 
         public static string SwitchPlayerAndCpuTurns(string userInput) //rewrite this over and make it make sense 
         {
 
             bool playerTurnSwitch = false; // put this into a while loop then figure out the logical flow or soemthing
-            
+
             if (userInput == GameConstants.PLAYERCHOICE_X)
             {
                 playerTurnSwitch = true;
