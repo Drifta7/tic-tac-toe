@@ -13,7 +13,7 @@ namespace tic_tac_toe
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
             string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid 
 
-            for (int rows = 0; rows < ticTacToeGrid.GetLength(0); rows++) // this is for 
+            for (int rows = 0; rows < ticTacToeGrid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < ticTacToeGrid.GetLength(1); cols++)
                 {
@@ -24,6 +24,18 @@ namespace tic_tac_toe
             return ticTacToeGrid;
         }
 
+        ///Updated Version of the Grid after marked on Grid/////
+        public static void DisplayUpdatedGameGrid(string[,] Grid)
+        {
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            {
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    Console.WriteLine($"{Grid[rows, cols]}");
+                }
+                Console.WriteLine();
+            }
+        }
         public static void ClearGridForNewInput()
         {
             Console.Clear();
@@ -44,10 +56,10 @@ namespace tic_tac_toe
         /// <param name="Playersymbol2">Enter PLAYERCHOICE_O</param>
         /// <param name="PlayerMark"> Enter DecidePlayerSymbol() method</param>
 
-        // this Function will check to see if the space on the grid is already occupied
+        // this Method will check to see if the space on the grid is already occupied
         public static bool CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark) // (originally void) boolean was already set to true
         {
-            // this check that the userinoput is in bounds of the Grid anything outside will cause an error
+            // this check that the userInput is in bounds of the Grid anything outside will cause an error
             if (rowNum < 0 || rowNum >= Grid.GetLength(0) || colNum < 0 || colNum >= Grid.GetLength(1))
             {
                 Console.WriteLine("Invaild Position, Please select a vaild position");
@@ -63,10 +75,11 @@ namespace tic_tac_toe
                 Grid[rowNum, colNum] = PlayerMark; // this is line to place the player mark into the Grid (whether human or CPU)
                 return false;
             }
-            Console.WriteLine(" Unexpected Error ");
+            Console.WriteLine("Unexpected Error ");
             return true;
         }
 
+        /// I will fix this when the other Logic Is done!!!! //////
         public static string SwitchPlayerAndCpuTurns(string userInput) //rewrite this over and make it make sense 
         {
 
@@ -90,7 +103,7 @@ namespace tic_tac_toe
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
-                string checkPlayerMarkMatch = Grid[rows, 0];
+                string checkPlayerMarkMatch = Grid[rows, 0]; // this checks the 1st element of the rows
                 bool PlayerAllMatch = true;
 
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
@@ -100,6 +113,10 @@ namespace tic_tac_toe
                         PlayerAllMatch = false;
                         break;
                     }
+                }
+                if (PlayerAllMatch)
+                {
+
                 }
             }
         }

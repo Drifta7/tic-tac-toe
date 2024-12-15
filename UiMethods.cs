@@ -49,7 +49,7 @@ namespace tic_tac_toe
         //------------------------------------------------------------------------------------------------------------------------//
 
         // this checks if the user enters anything (less or equal to) or (greater or equal) to within the range of 1-9
-        public static void PlacingPlayerEntryOnGrid() // entry for user on grid
+        public static void PlacingPlayerEntryOnGrid() // placing entry for user on grid
         {
             Random rng = new Random(); // random seed
             int gridRange = rng.Next(GameConstants.LOW, GameConstants.HIGH);// this determines the range of the grid positions
@@ -65,6 +65,7 @@ namespace tic_tac_toe
                 {
                     if (gridRange >= GameConstants.LOW && gridRange <= GameConstants.HIGH)
                     {
+                        (int rows, int cols) = MapPostionToGrid(placingPlayerPositionOnGrid);
                         Console.WriteLine("Entry is within range ,space has been selected "); // when this is called correctly working shorten the message
                         isTheEntryWithinRange = true;
                     }
@@ -78,14 +79,12 @@ namespace tic_tac_toe
 
             }
             while (!isTheEntryWithinRange);
-
-            (int rows, int cols) = MapPostionToGrid(placingPlayerPositionOnGrid);
-
         }
         //------------------------------------------------------------------------------------------------------------------//
-        
+
+
         // this will make the Grid dynamic by not hard coding the elements and user selecting where to put their mark
-        static (int, int) MapPostionToGrid(string position)
+        public static (int, int) MapPostionToGrid(string position)
 
         {
             if (int.TryParse(position, out int GridPosition))
@@ -102,12 +101,20 @@ namespace tic_tac_toe
 
 
         public static void CpuAI()
-        {   // use a random "seed" for when there are no matches from the players mark
+        {   // use a random "seed" for when there are no matches from the players mark ( namely the CPu)
             // when player selects mark place the Cpu's mark in this function for check when player has 2 makrs in a row or column ( a strategic block)
             // use call function to check if the space is not occupied 
-            
+
             Random rng = new Random(); // random seed for the Cpu to place it's mark
-            
+            int cpuPlaceMarkInSpace = rng.Next(GameConstants.LOW, GameConstants.HIGH);
+
+            Logic.RowsCheck(Logic.DisplayUpdatedGameGrid()); // this might not work because this should be checking the " UPDATED GRID" (WIP)
+
+            Logic.CenterLineCheck(Logic.DisplayTicTacToeGrid());
+            Logic.ColoumnsCheck(Logic.DisplayTicTacToeGrid());
+
+            Logic.TopLeftDiagonalCheck(Logic.DisplayTicTacToeGrid());
+            Logic.TopRightDiaginalCheck(Logic.DisplayTicTacToeGrid());
 
             Logic.CheckForValidInputSymbolInGrid(Logic.DisplayTicTacToeGrid(), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
 
