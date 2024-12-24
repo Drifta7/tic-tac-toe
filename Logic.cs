@@ -8,24 +8,10 @@ namespace tic_tac_toe
 {
     class Logic
     {
-        public static string[,] DisplayTicTacToeGrid()
-        {
-            //////// this is to diplay the tic-tac-toe grid//////////////////////////
-            string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid 
 
-            for (int rows = 0; rows < ticTacToeGrid.GetLength(0); rows++)
-            {
-                for (int cols = 0; cols < ticTacToeGrid.GetLength(1); cols++)
-                {
-                    Console.Write(ticTacToeGrid[rows, cols] = " - ");
-                }
-                Console.WriteLine();
-            }
-            return ticTacToeGrid;
-        }
 
-        ///Updated Version of the Grid after marked on Grid/////
-        public static void DisplayUpdatedGameGrid(string[,] Grid)
+        ///Updated Version of the Grid after Player marked on Grid/////
+        public static string[,] DisplayUpdatedGameGrid(string[,] Grid)
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
@@ -35,13 +21,13 @@ namespace tic_tac_toe
                 }
                 Console.WriteLine();
             }
+            return Grid;
         }
         public static void ClearGridForNewInput()
         {
             Console.Clear();
             Console.WriteLine("Please hit Enter To Continue......");
             Console.ReadKey();
-
         }
 
 
@@ -114,7 +100,7 @@ namespace tic_tac_toe
                         break;
                     }
                 }
-                if (PlayerAllMatch)
+                if (PlayerAllMatch) //if PLayerAllMatch is true
                 {
 
                 }
@@ -185,7 +171,27 @@ namespace tic_tac_toe
                 }
 
             }
-
         }
+        public static void CpuAI()
+        {   // use a random "seed" for when there are no matches from the players mark ( namely the CPu)
+            // when player selects mark place the Cpu's mark in this function for check when player has 2 makrs in a row or column ( a strategic block)
+            // use call function to check if the space is not occupied 
+
+            Random rng = new Random(); // random seed for the Cpu to place it's mark
+            int cpuPlaceMarkInSpace = rng.Next(GameConstants.LOW, GameConstants.HIGH);
+
+            RowsCheck(Logic.DisplayUpdatedGameGrid(Program.ticTacToeGrid)); // this might not work because this should be checking the " UPDATED GRID" (WIP)
+
+            CenterLineCheck(Logic.DisplayUpdatedGameGrid(Program.ticTacToeGrid));
+            ColoumnsCheck(Logic.DisplayUpdatedGameGrid(Program.ticTacToeGrid));
+
+            TopLeftDiagonalCheck(Program.ticTacToeGrid);
+            TopRightDiaginalCheck(Program.ticTacToeGrid);
+
+            CheckForValidInputSymbolInGrid(Program.ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
+
+            //if space is not occupied then put in the cpu mark on the grid
+        }
+
     }
 }

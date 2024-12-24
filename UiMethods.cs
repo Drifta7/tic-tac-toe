@@ -7,8 +7,25 @@ namespace tic_tac_toe
         public static void DisplayWelcomeMessage()
         {
             Console.WriteLine("Welcome to The wonderful world of Tic-Tac-Toe");
-            Console.WriteLine("Choose X's or O's ");
+            Console.WriteLine($"Choose {GameConstants.PLAYERCHOICE_X} or {GameConstants.PLAYERCHOICE_O}");
         } // generic display message
+
+
+        public static string[,] DisplayTicTacToeGrid(string[,] Grid)
+        {
+            //////// this is to diplay the tic-tac-toe grid//////////////////////////
+            
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            {
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    Console.Write(Grid[rows, cols] = " - ");
+                }
+                Console.WriteLine();
+            }
+            return Grid;
+        }
+
 
         // the User will input the mark in this method
         public static string UserSelectedMark()
@@ -49,7 +66,7 @@ namespace tic_tac_toe
         //------------------------------------------------------------------------------------------------------------------------//
 
         // this checks if the user enters anything (less or equal to) or (greater or equal) to within the range of 1-9
-        public static void PlacingPlayerEntryOnGrid() // placing entry for user on grid
+        public static int PlacingPlayerEntryOnGrid() // placing entry for user on grid
         {
             Random rng = new Random(); // random seed
             int gridRange = rng.Next(GameConstants.LOW, GameConstants.HIGH);// this determines the range of the grid positions
@@ -58,6 +75,8 @@ namespace tic_tac_toe
 
             string placingPlayerPositionOnGrid = Console.ReadLine(); // user enters position on gamegrid
             bool isTheEntryWithinRange = false; // bool set to false 
+            
+            int gridPosition = 0;
 
             do
             {
@@ -65,7 +84,6 @@ namespace tic_tac_toe
                 {
                     if (gridRange >= GameConstants.LOW && gridRange <= GameConstants.HIGH)
                     {
-                        (int rows, int cols) = MapPostionToGrid(placingPlayerPositionOnGrid);
                         Console.WriteLine("Entry is within range ,space has been selected "); // when this is called correctly working shorten the message
                         isTheEntryWithinRange = true;
                     }
@@ -79,6 +97,7 @@ namespace tic_tac_toe
 
             }
             while (!isTheEntryWithinRange);
+            return gridPosition; // returns value of GridPostion
         }
         //------------------------------------------------------------------------------------------------------------------//
 
@@ -99,30 +118,6 @@ namespace tic_tac_toe
             }
         }
 
-
-        public static void CpuAI()
-        {   // use a random "seed" for when there are no matches from the players mark ( namely the CPu)
-            // when player selects mark place the Cpu's mark in this function for check when player has 2 makrs in a row or column ( a strategic block)
-            // use call function to check if the space is not occupied 
-
-            Random rng = new Random(); // random seed for the Cpu to place it's mark
-            int cpuPlaceMarkInSpace = rng.Next(GameConstants.LOW, GameConstants.HIGH);
-
-            Logic.RowsCheck(Logic.DisplayUpdatedGameGrid()); // this might not work because this should be checking the " UPDATED GRID" (WIP)
-
-            Logic.CenterLineCheck(Logic.DisplayTicTacToeGrid());
-            Logic.ColoumnsCheck(Logic.DisplayTicTacToeGrid());
-
-            Logic.TopLeftDiagonalCheck(Logic.DisplayTicTacToeGrid());
-            Logic.TopRightDiaginalCheck(Logic.DisplayTicTacToeGrid());
-
-            Logic.CheckForValidInputSymbolInGrid(Logic.DisplayTicTacToeGrid(), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
-
-            //if space is not occupied then put in the cpu mark on the grid
-        }
-
-
-
         ////////////////////////////////////////////////////////////////////////
         public static int WinGameCheck()
         {
@@ -130,6 +125,16 @@ namespace tic_tac_toe
             // this will check if the user or the computer has won
             // if (user or computer )
 
+        }
+
+        ////////-----------------------------------------------------------------------------------////
+
+        public static void ValidatePlayerInput()
+        {
+            int gridPostion = UiMethods.PlacingPlayerEntryOnGrid();//get vaild position from the player
+            (int row, int cols) = MapPostionToGrid(gridPostion.ToString()); // onverts the input to a string
+
+            Console.WriteLine($"You selected a grid position {gridPostion}, on row {row} and col{cols}");
         }
     }
 }
