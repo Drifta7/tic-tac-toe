@@ -14,7 +14,7 @@ namespace tic_tac_toe
         public static string[,] DisplayTicTacToeGrid(string[,] Grid)
         {
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
-            
+
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
@@ -30,7 +30,6 @@ namespace tic_tac_toe
         // the User will input the mark in this method
         public static string UserSelectedMark()
         {
-
             string userInput = Console.ReadLine(); // will use this as an argument for playerSelection() method
             return userInput;
         }
@@ -71,12 +70,12 @@ namespace tic_tac_toe
             Random rng = new Random(); // random seed
             int gridRange = rng.Next(GameConstants.LOW, GameConstants.HIGH);// this determines the range of the grid positions
 
-            Console.WriteLine(" To place your mark in the game grid, use a value between 1-9"); // prompt the user to enter number for grid
+            Console.WriteLine("To place your mark in the game grid, use a value between 1-9"); // prompt the user to enter number for grid
 
-            string placingPlayerPositionOnGrid = Console.ReadLine(); // user enters position on gamegrid
+            string placingPlayerPositionOnGrid = Console.ReadLine(); // user number enters position on gamegrid
             bool isTheEntryWithinRange = false; // bool set to false 
-            
-            int gridPosition = 0;
+
+            int gridPosition = 1;
 
             do
             {
@@ -97,7 +96,7 @@ namespace tic_tac_toe
 
             }
             while (!isTheEntryWithinRange);
-            return gridPosition; // returns value of GridPostion
+            return placingPlayerPositionOnGrid; // returns value of GridPostion
         }
         //------------------------------------------------------------------------------------------------------------------//
 
@@ -108,13 +107,24 @@ namespace tic_tac_toe
         {
             if (int.TryParse(position, out int GridPosition))
             {
-                int row = (GridPosition - 1) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
-                int cols = (GridPosition - 1) % GameConstants.NUMBER_OF_COLUMNS;
-                return (row, cols);
+                int totalCells = GameConstants.NUMBER_OF_ROWS * GameConstants.NUMBER_OF_COLUMNS;
+
+                if (GridPosition >= 1 && GridPosition <= totalCells)
+                {
+                    int rows = (GridPosition - 1) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
+                    int cols = (GridPosition - 1) % GameConstants.NUMBER_OF_COLUMNS;
+                    return (rows, cols);
+                }
+
+                else
+                {
+                    throw new ArgumentException("Invaild Input, please enter a Vaild number");
+                }
             }
+            
             else
             {
-                throw new ArgumentException("Invaild Input, please enter a Vaild number");
+                throw new ArgumentException("Invaild input");
             }
         }
 
@@ -128,14 +138,26 @@ namespace tic_tac_toe
         }
 
         ////////-----------------------------------------------------------------------------------////
-
-        public static void ValidatePlayerInput()
+        // might be an issue with this method ///
+        public static void ValidatePlayerInput(string[,] gameGrid, string playerSymbol)
         {
-            int gridPostion = UiMethods.PlacingPlayerEntryOnGrid();//get vaild position from the player
-            (int row, int cols) = MapPostionToGrid(gridPostion.ToString()); // onverts the input to a string
+            int gridPostion = UiMethods.PlacingPlayerEntryOnGrid(); //gets vaild position from the player
+            (int rows, int cols) = MapPostionToGrid(gridPostion.ToString()); // converts the input to a string
 
-            Console.WriteLine($"You selected a grid position {gridPostion}, on row {row} and col{cols}");
+            if (gameGrid[rows, cols] == " - ") // checks if there is an empty space // error here out of bounds of array mot likey due to double entry
+            {
+                gameGrid[rows, cols] = playerSymbol; // input player symbol
+                Console.WriteLine($"You selected a grid position {gridPostion}, on row: {rows} and col :{cols}");
+            }
+            else
+            {
+                Console.WriteLine("That Position ius already occupied PLease try again");
+                ValidatePlayerInput(gameGrid, playerSymbol); // prompt user in case input isn't valid
+            }
         }
     }
 }
+
+
+
 

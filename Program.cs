@@ -14,9 +14,12 @@ namespace tic_tac_toe
 
             UiMethods.DisplayTicTacToeGrid(ticTacToeGrid);// this displays the Tictactoe grid
 
-            UiMethods.PlacingPlayerEntryOnGrid();
+            UiMethods.ValidatePlayerInput(ticTacToeGrid, playerSymbol ); // testing DecidePLayerSymbol() method if not change it 
+            //UiMethods.PlacingPlayerEntryOnGrid();
 
-            Logic.SwitchPlayerAndCpuTurns(UiMethods.UserSelectedMark()); // might have to change this later the: UserSelectMark()
+            Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // hopefully displays the updated grid.
+
+           // Logic.SwitchPlayerAndCpuTurns(UiMethods.UserSelectedMark()); // might have to change this later the: UserSelectMark()
                                                                          // Cpu check(s) will follow
 
             Logic.CheckForValidInputSymbolInGrid(UiMethods.DisplayTicTacToeGrid(ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
@@ -38,3 +41,4 @@ namespace tic_tac_toe
         }
     }
 }
+// left off at the issue where placingPlayerPositionOnGrid in UiMethods line 99 in the Method PlacingPLayerEntryOnGrid().

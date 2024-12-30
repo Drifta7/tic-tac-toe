@@ -17,13 +17,13 @@ namespace tic_tac_toe
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
-                    Console.WriteLine($"{Grid[rows, cols]}");
+                    Console.Write($"{Grid[rows, cols]}");
                 }
                 Console.WriteLine();
             }
             return Grid;
         }
-        public static void ClearGridForNewInput()
+        public static void ClearGridForNewInput() // should be placed under UiMethiods
         {
             Console.Clear();
             Console.WriteLine("Please hit Enter To Continue......");
