@@ -185,8 +185,8 @@ namespace tic_tac_toe
             CenterLineCheck(Logic.DisplayUpdatedGameGrid(Program.ticTacToeGrid));
             ColoumnsCheck(Logic.DisplayUpdatedGameGrid(Program.ticTacToeGrid));
 
-            TopLeftDiagonalCheck(Program.ticTacToeGrid);
-            TopRightDiaginalCheck(Program.ticTacToeGrid);
+            TopLeftDiagonalCheck(Logic.DisplayUpdatedGameGrid(Program.ticTacToeGrid));
+            TopRightDiaginalCheck(Logic.DisplayUpdatedGameGrid(Program.ticTacToeGrid));
 
             CheckForValidInputSymbolInGrid(Program.ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
 

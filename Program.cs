@@ -18,6 +18,8 @@ namespace tic_tac_toe
             //UiMethods.PlacingPlayerEntryOnGrid();
 
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // hopefully displays the updated grid. which it did :D
+
+            // once the updated grid     is displayed CPU should then put it's mark into the grid //
         
             //////////__------------------- anything above this line works correctly ---------------------------------------------////
 
@@ -25,12 +27,12 @@ namespace tic_tac_toe
            // Logic.SwitchPlayerAndCpuTurns(UiMethods.UserSelectedMark()); // might have to change this later the: UserSelectMark()
                                                                          // Cpu check(s) will follow
 
-            Logic.CheckForValidInputSymbolInGrid(UiMethods.DisplayTicTacToeGrid(ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
+            Logic.CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, playerSymbol);
 
             Logic.ClearGridForNewInput(); // clears the grids
                                           // idea! = if  the usermakr for CheckForValidInputSymbolInGrid is true then use that to switch to the other user, then test it out
 
-            if (!Logic.CheckForValidInputSymbolInGrid(UiMethods.DisplayTicTacToeGrid(ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol()))
+            if (!Logic.CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, playerSymbol))
             {
                 Console.WriteLine("Mark placed succesfully");
             }

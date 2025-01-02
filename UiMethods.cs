@@ -39,6 +39,7 @@ namespace tic_tac_toe
         {
             bool isTheSelectionValid = false;
             string PlayerEntryCheck = UiMethods.UserSelectedMark();
+            string cpuChoiceSymbol = "";
 
             do
             {
@@ -46,9 +47,20 @@ namespace tic_tac_toe
                 if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X || PlayerEntryCheck == GameConstants.PLAYERCHOICE_O)
                 {
                     isTheSelectionValid = true;
+
+                    if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X)
+                    {
+                        cpuChoiceSymbol = GameConstants.PLAYERCHOICE_O;
+                    }
+
+                    else
+                    {
+                        cpuChoiceSymbol = GameConstants.PLAYERCHOICE_X;
+                    }
+
                     Console.WriteLine($"Player has selected: {PlayerEntryCheck}");
+                    Console.WriteLine($"CPU will play as {cpuChoiceSymbol}");
                     Console.WriteLine();
-                    break;
                 }
 
                 if (PlayerEntryCheck != GameConstants.PLAYERCHOICE_X && PlayerEntryCheck != GameConstants.PLAYERCHOICE_O)
@@ -81,7 +93,7 @@ namespace tic_tac_toe
                 {
                     if (numberPositionOnGrid >= GameConstants.LOW && numberPositionOnGrid <= GameConstants.HIGH)
                     {
-                        Console.WriteLine("Entry is within range ,space has been selected "); // when this is called correctly working shorten the message
+                        Console.WriteLine("Space has been selected ");
                         isTheEntryWithinRange = true;
                     }
 
@@ -107,7 +119,7 @@ namespace tic_tac_toe
             {
                 int totalCells = GameConstants.NUMBER_OF_ROWS * GameConstants.NUMBER_OF_COLUMNS;
 
-                if (GridPosition >= 1 && GridPosition <= totalCells)
+                if (GridPosition >= 1 && GridPosition <= totalCells) // used to make sure that the entry selection remains inbounds to the Grid array
                 {
                     int rows = (GridPosition - 1) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
                     int cols = (GridPosition - 1) % GameConstants.NUMBER_OF_COLUMNS;
@@ -119,7 +131,7 @@ namespace tic_tac_toe
                     throw new ArgumentException("Invaild Input, please enter a Vaild number");
                 }
             }
-            
+
             else
             {
                 throw new ArgumentException("Invaild input");
