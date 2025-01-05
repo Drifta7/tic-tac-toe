@@ -42,7 +42,7 @@ namespace tic_tac_toe
         /// <param name="Playersymbol2">Enter PLAYERCHOICE_O</param>
         /// <param name="PlayerMark"> Enter DecidePlayerSymbol() method</param>
 
-        // this Method will check to see if the space on the grid is already occupied
+        // this Method will check to see if the space on the grid is already occupied || Note this most likely will be used by the CPU
         public static bool CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark) // (originally void) boolean was already set to true
         {
             // this check that the userInput is in bounds of the Grid anything outside will cause an error
@@ -55,10 +55,11 @@ namespace tic_tac_toe
             if (Grid[rowNum, colNum] == Playersymbol || Grid[rowNum, colNum] == Playersymbol2) // checks if the space is valid for playerMark entry 
             {
                 Console.WriteLine("this space is already occupied, Please select another");
+                //enter player input here not sure what exactly ???
             }
-            if (Grid[rowNum, colNum] == "_") // checks where in the grid the 'placeHolder' is
+            if (Grid[rowNum, colNum] ==  "_") // checks where in the grid the 'placeHolder' is
             {
-                Grid[rowNum, colNum] = PlayerMark; // this is line to place the player mark into the Grid (whether human or CPU)
+                Grid[rowNum, colNum] = PlayerMark; // this is line to place the player mark into the Grid (whether human or CPU) more so cpu
                 return false;
             }
             Console.WriteLine("Unexpected Error ");
@@ -102,7 +103,7 @@ namespace tic_tac_toe
                 }
                 if (PlayerAllMatch) //if PLayerAllMatch is true
                 {
-
+                    WinGameCheck();
                 }
             }
         }
@@ -119,13 +120,16 @@ namespace tic_tac_toe
                     CenterArrayMatches = false;
                     break;
                 }
+                if (CenterArrayMatches)
+                {
+                    WinGameCheck();
+                }
 
             }
         }
 
         public static void ColoumnsCheck(string[,] Grid)
         {
-            bool numberHasMatched = false;
             for (int cols = 0; cols < Grid.GetLength(0); cols++)
             {
                 string checkEqualNUmbers = Grid[0, cols];// the first element to compare to
@@ -137,6 +141,10 @@ namespace tic_tac_toe
                     {
                         allMatched = false;
                         break;
+                    }
+                    if (allMatched)
+                    {
+                        WinGameCheck();
                     }
                 }
             }
@@ -154,6 +162,10 @@ namespace tic_tac_toe
                     allDiagonalMatch = false;
                     break;
                 }
+                if (allDiagonalMatch)
+                {
+                    WinGameCheck();
+                }
             }
         }
 
@@ -169,9 +181,48 @@ namespace tic_tac_toe
                     allDiagMatch = false;
                     break;
                 }
+                if (allDiagMatch)
+                {
+                    WinGameCheck();
+                }
 
             }
         }
+        //------------------ WinCheck ------------------
+        public static int WinGameCheck()
+        {
+            Console.WriteLine("Either CPU Wins or PLayer");
+            throw new NotImplementedException();
+            // this will check if the user or the computer has won
+            // if (user or computer )
+
+        }
+
+       public static bool AllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
+        {
+            string GridSpace = "_";
+            bool blankspaceLeft = false;
+
+            for (int rows = 0; rows < Grid.GetLength(0); rows ++)
+            {
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    if (Grid[rows, cols] == GridSpace)
+                    {
+                        blankspaceLeft = true;
+                        break;
+                    }
+                    if (blankspaceLeft) break; // for the outer loop
+                }
+
+                if (!blankspaceLeft)
+                {
+                    Console.WriteLine("The Game is a Tie");
+                }
+            }
+            return !blankspaceLeft;
+        }
+        //---------------------------------------
         public static void CpuAI()
         {   // use a random "seed" for when there are no matches from the players mark ( namely the CPu)
             // when player selects mark place the Cpu's mark in this function for check when player has 2 makrs in a row or column ( a strategic block)

@@ -139,13 +139,7 @@ namespace tic_tac_toe
         }
 
         ////////////////////////////////////////////////////////////////////////
-        public static int WinGameCheck()
-        {
-            throw new NotImplementedException();
-            // this will check if the user or the computer has won
-            // if (user or computer )
-
-        }
+      
 
         ////////-----------------------------------------------------------------------------------////
         // might be an issue with this method ///
