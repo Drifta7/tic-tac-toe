@@ -48,7 +48,7 @@ namespace tic_tac_toe
                 {
                     isTheSelectionValid = true;
 
-                    if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X)
+                    if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X) // the choice make sure that selection is opposite of CPU selection
                     {
                         cpuChoiceSymbol = GameConstants.PLAYERCHOICE_O;
                     }

@@ -19,8 +19,14 @@ namespace tic_tac_toe
             UiMethods.ValidatePlayerInput(ticTacToeGrid, playerSymbol); // testing DecidePLayerSymbol() method if not change it 
             //UiMethods.PlacingPlayerEntryOnGrid();
 
-            Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // hopefully displays the updated grid. which it did :D
+            Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // hopefully displays the updated grid. 
+            
+        
+            Logic.ClearGridForNewInput(); // clears the grids
 
+            Logic.CpuAI();
+
+            Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 
             Logic.AllSpacesFilled(UpdatedGameGrid); // the last method to be checked 
 
@@ -34,7 +40,6 @@ namespace tic_tac_toe
 
             //Logic.CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, playerSymbol);
 
-            Logic.ClearGridForNewInput(); // clears the grids
                                           // idea! = if  the usermakr for CheckForValidInputSymbolInGrid is true then use that to switch to the other user, then test it out
 
             if (!Logic.CheckForValidInputSymbolInGrid(UpdatedGameGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, playerSymbol))

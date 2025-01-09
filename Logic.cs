@@ -57,7 +57,7 @@ namespace tic_tac_toe
                 Console.WriteLine("this space is already occupied, Please select another");
                 //enter player input here not sure what exactly ???
             }
-            if (Grid[rowNum, colNum] ==  "_") // checks where in the grid the 'placeHolder' is
+            if (Grid[rowNum, colNum] == "_") // checks where in the grid the 'placeHolder' is
             {
                 Grid[rowNum, colNum] = PlayerMark; // this is line to place the player mark into the Grid (whether human or CPU) more so cpu
                 return false;
@@ -65,7 +65,28 @@ namespace tic_tac_toe
             Console.WriteLine("Unexpected Error ");
             return true;
         }
+        public static string CpuCheck(string[,] Grid, string playerMark) // replace playeMark with CPu mark
+        {
+            bool isGridMarked = false;
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            {
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    if (Grid[rows, cols] == "_")
+                    {
+                        Grid[rows, cols] = playerMark;
+                        isGridMarked = true;
+                        break;
+                    }
 
+                }
+                if (isGridMarked)
+                {
+                    break; // breaks out of the outer loop
+                }
+            }
+            return playerMark;
+        }
         /// I will fix this when the other Logic Is done!!!! //////
         public static string SwitchPlayerAndCpuTurns(string userInput) //rewrite this over and make it make sense 
         {
@@ -198,12 +219,12 @@ namespace tic_tac_toe
 
         }
 
-       public static bool AllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
+        public static bool AllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
             string GridSpace = "_";
             bool blankspaceLeft = false;
 
-            for (int rows = 0; rows < Grid.GetLength(0); rows ++)
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
@@ -222,6 +243,12 @@ namespace tic_tac_toe
             }
             return !blankspaceLeft;
         }
+        //-------------------------------------------------------------------------------
+
+
+
+
+
         //---------------------------------------
         public static void CpuAI()
         {   // use a random "seed" for when there are no matches from the players mark ( namely the CPu)
