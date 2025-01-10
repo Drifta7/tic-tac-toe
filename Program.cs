@@ -14,6 +14,8 @@ namespace tic_tac_toe
             string playerSymbol = UiMethods.DecidePlayerSymbol();// stores the Symbol selection in a variable
             string[,] UpdatedGameGrid = Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // put this elsewhere so that it makes sense in the order of how the game is run
 
+            
+
             UiMethods.DisplayTicTacToeGrid(ticTacToeGrid);// this displays the Tictactoe grid
 
             UiMethods.ValidatePlayerInput(ticTacToeGrid, playerSymbol); // testing DecidePLayerSymbol() method if not change it 
@@ -42,14 +44,6 @@ namespace tic_tac_toe
 
                                           // idea! = if  the usermakr for CheckForValidInputSymbolInGrid is true then use that to switch to the other user, then test it out
 
-            if (!Logic.CheckForValidInputSymbolInGrid(UpdatedGameGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, playerSymbol))
-            {
-                Console.WriteLine("Mark placed succesfully");
-            }
-            else
-            {
-                Console.WriteLine("Please select a different position");
-            }
 
             while (true) ; // actual condition not implemented yet.
 

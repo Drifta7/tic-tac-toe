@@ -68,6 +68,7 @@ namespace tic_tac_toe
         public static string CpuCheck(string[,] Grid, string playerMark) // replace playeMark with CPu mark
         {
             bool isGridMarked = false;
+
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
@@ -219,6 +220,7 @@ namespace tic_tac_toe
 
         }
 
+        // The method checks if all the spaces are filled and the is not declared winner 
         public static bool AllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
             string GridSpace = "_";
@@ -246,7 +248,18 @@ namespace tic_tac_toe
         //-------------------------------------------------------------------------------
 
 
+        public static void PreventOverrideOfMarks(string[,] Grid, int rowNum, int colsNum, string playerSymbol, string playerSymbol2) // this will use the updated game grid 
+        {
+            while (Grid[rowNum, colsNum] == playerSymbol || Grid[rowNum, colsNum] == playerSymbol2) // whether human player or CPU entry
+            {
+                Console.WriteLine("This space is already occupied, PLease select another space");
 
+                int newEntry = UiMethods.PlacingPlayerEntryOnGrid(); // this will deal with selecting number to the grid
+
+                rowNum = (newEntry - 1) / Grid.GetLength(1);
+                colsNum = (newEntry - 1) % Grid.GetLength(1);
+            }
+        }
 
 
         //---------------------------------------
