@@ -11,17 +11,19 @@ namespace tic_tac_toe
             //while (!Logic.WinGameCheck() && !Logic.AllSpacesFilled(Logic.DisplayUpdatedGameGrid))
             UiMethods.DisplayWelcomeMessage();
 
-            string playerSymbol = UiMethods.DecidePlayerSymbol();// stores the Symbol selection in a variable
+            string DecidePlayerSymbol = UiMethods.DecidePlayerSymbol();// stores the Symbol selection in a variable
             string[,] UpdatedGameGrid = Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // put this elsewhere so that it makes sense in the order of how the game is run
-
             
+            
+           
 
             UiMethods.DisplayTicTacToeGrid(ticTacToeGrid);// this displays the Tictactoe grid
 
-            UiMethods.ValidatePlayerInput(ticTacToeGrid, playerSymbol); // testing DecidePLayerSymbol() method if not change it 
+            UiMethods.ValidatePlayerInput(ticTacToeGrid, DecidePlayerSymbol); // testing DecidePLayerSymbol() method if not change it 
             //UiMethods.PlacingPlayerEntryOnGrid();
 
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // hopefully displays the updated grid. 
+            
             
         
             Logic.ClearGridForNewInput(); // clears the grids

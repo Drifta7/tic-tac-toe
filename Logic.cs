@@ -65,7 +65,8 @@ namespace tic_tac_toe
             Console.WriteLine("Unexpected Error ");
             return true;
         }
-        public static string CpuCheck(string[,] Grid, string playerMark) // replace playeMark with CPu mark
+        // this check if there is an empty space on the grid the Cpue will input its mark on it
+        public static string CpuCheck(string[,] Grid, string playerMark) // NOte : replace playeMark with CPu mark
         {
             bool isGridMarked = false;
 
@@ -77,7 +78,7 @@ namespace tic_tac_toe
                     {
                         Grid[rows, cols] = playerMark;
                         isGridMarked = true;
-                        break;
+                        break; // so that it breaks out the loop when placed 
                     }
 
                 }
@@ -89,22 +90,22 @@ namespace tic_tac_toe
             return playerMark;
         }
         /// I will fix this when the other Logic Is done!!!! //////
-        public static string SwitchPlayerAndCpuTurns(string userInput) //rewrite this over and make it make sense 
+        public static string SwitchPlayerAndCpuTurns(string PlayerEntryCheck) // this method stored in DecidePlayerSymbol variable
         {
 
             bool playerTurnSwitch = false; // put this into a while loop then figure out the logical flow or soemthing
 
-            if (userInput == GameConstants.PLAYERCHOICE_X)
+            if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X|| PlayerEntryCheck == GameConstants.PLAYERCHOICE_O)
             {
                 playerTurnSwitch = true;
-                Console.WriteLine("It is the Player 1 turn");
+                Console.WriteLine($"It is the {PlayerEntryCheck}'s turn");
             }
-            else if (userInput != "x")
+            else if (PlayerEntryCheck != "x")
             {
-                Console.WriteLine("it is the Computer's turn");
+                Console.WriteLine($"It is the {PlayerEntryCheck}'s turn");
             }
 
-            return userInput;
+            return PlayerEntryCheck;
         }
 
         /////////////////////////////////Checks for Player Position///////////////////////////////////////
@@ -221,6 +222,7 @@ namespace tic_tac_toe
         }
 
         // The method checks if all the spaces are filled and the is not declared winner 
+        // this will be set to false during the game, when it becomes true then the game will restart
         public static bool AllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
             string GridSpace = "_";
