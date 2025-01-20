@@ -10,7 +10,10 @@ namespace tic_tac_toe
             Console.WriteLine($"Choose {GameConstants.PLAYERCHOICE_X} or {GameConstants.PLAYERCHOICE_O}");
         } // generic display message
 
-
+        public static void GameOverMessage()
+        {
+            Console.WriteLine("There are no more Spaces on the grid GameOver");
+        }
         public static string[,] DisplayTicTacToeGrid(string[,] Grid)
         {
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
@@ -141,6 +144,11 @@ namespace tic_tac_toe
         ////////////////////////////////////////////////////////////////////////
 
 
+        public static void TheCpuAiPLay()
+        {
+            
+        }
+
         ////////-----------------------------------------------------------------------------------////
         // might be an issue with this method ///
         public static void ValidatePlayerInput(string[,] gameGrid, string playerSymbol)
@@ -151,11 +159,11 @@ namespace tic_tac_toe
             if (gameGrid[rows, cols] == " - ") // checks if there is an empty space 
             {
                 gameGrid[rows, cols] = playerSymbol; // input player symbol into space
-                Console.WriteLine($"You selected a grid position {gridPostion}, on row: {rows} and col: {cols}");
+                Console.WriteLine($"You selected a grid position {gridPostion}, on row: {rows} and col: {cols}"); // used for testing purposes
             }
             else
             {
-                Console.WriteLine("That Position ius already occupied PLease try again");
+                Console.WriteLine("That Position is already occupied please try again");
                 ValidatePlayerInput(gameGrid, playerSymbol); // prompt user in case input isn't valid
             }
         }
