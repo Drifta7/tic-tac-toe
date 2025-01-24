@@ -9,11 +9,20 @@ namespace tic_tac_toe
         static void Main(string[] args)
         {
             UiMethods.DisplayWelcomeMessage();
+            bool NobodyHasWonTheGameCheck = false; // this has to be a global bool for the while loop
+           
+            // might have to change the it just to DecidePLayerSymbol
+            string ValidatePLayerMark = UiMethods.ValidatePlayerInput(Logic.DisplayUpdatedGameGrid(ticTacToeGrid),UiMethods.DecidePlayerSymbol()); // change userselect to DecidePLayerSymbol
+           
+            // use this for the save variable for CPu entry 
+            string CpuMarkCheck = Logic.CpuCheck(Logic.DisplayUpdatedGameGrid(ticTacToeGrid), UiMethods.DecidePlayerSymbol());
             
-            while (!Logic.WinGameCheck() && !Logic.AllSpacesFilled(Logic.DisplayUpdatedGameGrid(ticTacToeGrid)))
+            while (!Logic.WinGameCheck() && !Logic.AllSpacesFilled(Logic.DisplayUpdatedGameGrid(ticTacToeGrid)) ||!NobodyHasWonTheGameCheck)
             {
                 string DecidePlayerSymbol = UiMethods.DecidePlayerSymbol(); // stores the Symbol selection in a variable
                 string[,] UpdatedGameGrid = Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // put this elsewhere so that it makes sense in the order of how the game is run
+                
+                
 
                 bool CheckIfAllSpacesAreFilled = Logic.AllSpacesFilled(UpdatedGameGrid);
 

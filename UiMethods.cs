@@ -150,8 +150,8 @@ namespace tic_tac_toe
         }
 
         ////////-----------------------------------------------------------------------------------////
-        // might be an issue with this method ///
-        public static void ValidatePlayerInput(string[,] gameGrid, string playerSymbol)
+        // this Method puts the User Entryon to the updated grid and checks to see if it is valid ///
+        public static string ValidatePlayerInput(string[,] gameGrid, string playerSymbol)
         {
             int gridPostion = UiMethods.PlacingPlayerEntryOnGrid(); //gets vaild position from the player
             (int rows, int cols) = MapPostionToGrid(gridPostion.ToString()); // converts the input to a string
@@ -166,6 +166,7 @@ namespace tic_tac_toe
                 Console.WriteLine("That Position is already occupied please try again");
                 ValidatePlayerInput(gameGrid, playerSymbol); // prompt user in case input isn't valid
             }
+            return playerSymbol;
         }
     }
 }
