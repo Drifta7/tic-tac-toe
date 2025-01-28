@@ -77,6 +77,12 @@ namespace tic_tac_toe
             return PlayerEntryCheck;
         }
 
+        public static void ClearGridForNewInput() // should be placed under UiMethiods
+        {
+            Console.Clear();
+            Console.WriteLine("Please hit Enter To Continue......");
+            Console.ReadKey();
+        }
         //------------------------------------------------------------------------------------------------------------------------//
 
         // this checks if the user enters anything (less or equal to) or (greater or equal) to within the range of 1-9

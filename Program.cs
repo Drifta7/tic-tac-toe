@@ -31,11 +31,11 @@ namespace tic_tac_toe
                 UiMethods.ValidatePlayerInput(ticTacToeGrid, decidePlayerSymbol); // testing DecidePLayerSymbol() method if not change it 
                                                                                   //UiMethods.PlacingPlayerEntryOnGrid();
                 Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
-                Logic.ClearGridForNewInput(); // clears the grids
+                UiMethods.ClearGridForNewInput(); // clears the grids
 
                 Logic.CpusTurn(ticTacToeGrid);
 
-                Logic.ClearGridForNewInput();
+                UiMethods.ClearGridForNewInput();
 
                 Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 

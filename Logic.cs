@@ -35,12 +35,7 @@ namespace tic_tac_toe
         //    }
         //    return Grid;
         //}
-        public static void ClearGridForNewInput() // should be placed under UiMethiods
-        {
-            Console.Clear();
-            Console.WriteLine("Please hit Enter To Continue......");
-            Console.ReadKey();
-        }
+        
 
 
         //////// Method checks///////
