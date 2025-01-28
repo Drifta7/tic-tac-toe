@@ -11,7 +11,7 @@ namespace tic_tac_toe
 
 
         ///Updated Version of the Grid after Player marked on Grid/////
-        public static string[,] DisplayUpdatedGameGrid(string[,] Grid)
+        public static void DisplayUpdatedGameGrid(string[,] Grid)
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
@@ -21,9 +21,20 @@ namespace tic_tac_toe
                 }
                 Console.WriteLine();
             }
-            return Grid;
+           
         }
-
+        //public static string[,] DisplayUpdatedGameGrid(string[,] Grid)
+        //{
+        //    for (int rows = 0; rows < Grid.GetLength(0); rows++)
+        //    {
+        //        for (int cols = 0; cols < Grid.GetLength(1); cols++)
+        //        {
+        //            Console.Write($"{Grid[rows, cols]}");
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //    return Grid;
+        //}
         public static void ClearGridForNewInput() // should be placed under UiMethiods
         {
             Console.Clear();
@@ -239,7 +250,7 @@ namespace tic_tac_toe
 
         // The method checks if all the spaces are filled and the is not declared winner 
         // this will be set to false during the game, when it becomes true then the game will restart with no winners 
-        public static bool AllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
+        public static bool allSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
             string GridSpace = "_";
             bool blankspaceLeft = false;
@@ -292,17 +303,17 @@ namespace tic_tac_toe
             int cpuPlaceMarkInSpace = rng.Next(GameConstants.LOW, GameConstants.HIGH);
             string cpuPlaceMarkAsString = cpuPlaceMarkInSpace.ToString(); // used to convert Cpu random entry because cannot put int into a string 
 
-            Logic.PreventOverrideOfMarks(Logic.DisplayUpdatedGameGrid(ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
+            Logic.PreventOverrideOfMarks((ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
 
-            Logic.CpuCheck(DisplayUpdatedGameGrid(ticTacToeGrid), cpuPlaceMarkAsString);
+            Logic.CpuCheck((ticTacToeGrid), cpuPlaceMarkAsString);
 
-            CheckForRowWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid)); // this might not work because this should be checking the " UPDATED GRID" (WIP)
+            CheckForRowWin(ticTacToeGrid); // this might not work because this should be checking the " UPDATED GRID" (WIP)
 
-            CheckForCenterLineWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid));
-            CheckForColumnsWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid));
+            CheckForCenterLineWin(ticTacToeGrid);
+            CheckForColumnsWin(ticTacToeGrid);
 
-            CheckForTopLeftDiagonalWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid));
-            CheckTopRightDiagonalWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid));
+            CheckForTopLeftDiagonalWin(ticTacToeGrid);
+            CheckTopRightDiagonalWin(ticTacToeGrid);
 
             CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
 
@@ -311,17 +322,17 @@ namespace tic_tac_toe
         // will rework this at a later date
         public static void PlayerWinChceck(string[,] ticTacToeGrid)
         {
-            Logic.PreventOverrideOfMarks(Logic.DisplayUpdatedGameGrid(ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
+            Logic.PreventOverrideOfMarks((ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
 
            // Logic.CpuCheck(DisplayUpdatedGameGrid(ticTacToeGrid), cpuPlaceMarkAsString);
 
-            CheckForRowWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid)); // this might not work because this should be checking the " UPDATED GRID" (WIP)
+            CheckForRowWin(ticTacToeGrid); // this might not work because this should be checking the " UPDATED GRID" (WIP)
 
-            CheckForCenterLineWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid));
-            CheckForColumnsWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid));
+            CheckForCenterLineWin(ticTacToeGrid);
+            CheckForColumnsWin(ticTacToeGrid);
 
-            CheckForTopLeftDiagonalWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid));
-            CheckTopRightDiagonalWin(Logic.DisplayUpdatedGameGrid(ticTacToeGrid));
+            CheckForTopLeftDiagonalWin(ticTacToeGrid);
+            CheckTopRightDiagonalWin(ticTacToeGrid);
 
             CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
 

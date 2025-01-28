@@ -144,10 +144,7 @@ namespace tic_tac_toe
         ////////////////////////////////////////////////////////////////////////
 
 
-        public static void TheCpuAiPLay()
-        {
-            
-        }
+        
 
         ////////-----------------------------------------------------------------------------------////
         // this Method puts the User Entryon to the updated grid and checks to see if it is valid ///
