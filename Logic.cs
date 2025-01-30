@@ -72,7 +72,7 @@ namespace tic_tac_toe
             Console.WriteLine("Unexpected Error ");
             return true;
         }
-        // this check if there is an empty space on the grid the Cpu will input its mark on it
+        // this checks if there is an empty space on the grid the Cpu will input its mark on it
         public static string CpuCheck(string[,] Grid, string CpuMark)
         {
             bool isGridMarked = false;
@@ -87,7 +87,6 @@ namespace tic_tac_toe
                         isGridMarked = true;
                         break; // so that it breaks out the loop when placed 
                     }
-
                 }
                 if (isGridMarked)
                 {
@@ -150,7 +149,6 @@ namespace tic_tac_toe
                     CenterArrayMatches = false;
                     break;
                 }
-
             }
             if (CenterArrayMatches)
             {
@@ -219,7 +217,7 @@ namespace tic_tac_toe
             }
         }
         //------------------ WinCheck ------------------
-        public static bool WinGameCheck(string winnerSymbol)
+        public static bool WinGameCheck(string winnerSymbol, string winnerSymbol2)
         {
             bool winnerIsFound = false;
             if (winnerSymbol == GameConstants.PLAYERCHOICE_X)
@@ -229,7 +227,7 @@ namespace tic_tac_toe
             }
             if (winnerSymbol == GameConstants.PLAYERCHOICE_O)
             {
-                Console.WriteLine($"{winnerSymbol}... Please Try again");
+                Console.WriteLine($"{winnerSymbol2}... Please Try again");
                 winnerIsFound = true;
             }
             else
@@ -279,7 +277,7 @@ namespace tic_tac_toe
             {
                 Console.WriteLine("This space is already occupied, PLease select another space");
 
-                int newEntry = UiMethods.PlacingPlayerEntryOnGrid(); // this will deal with selecting number to the grid
+                int newEntry = UiMethods.PlacingPlayerSelectedEntryOnGrid(); // this will deal with selecting number to the grid
 
                 rowNum = (newEntry - 1) / Grid.GetLength(1);
                 colsNum = (newEntry - 1) % Grid.GetLength(1);
@@ -315,10 +313,10 @@ namespace tic_tac_toe
             //if space is not occupied then put in the cpu mark on the grid
         }
         // will rework this at a later date
-        public static void PlayerWinChceck(string[,] ticTacToeGrid)
+        public static void PlayerWinCheck(string[,] ticTacToeGrid)
         {
             Logic.PreventOverrideOfMarks((ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
-
+            
            // Logic.CpuCheck(DisplayUpdatedGameGrid(ticTacToeGrid), cpuPlaceMarkAsString);
 
             CheckForRowWin(ticTacToeGrid); // this might not work because this should be checking the " UPDATED GRID" (WIP)

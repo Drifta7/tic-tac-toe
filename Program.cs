@@ -10,17 +10,17 @@ namespace tic_tac_toe
             string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid 
             UiMethods.DisplayWelcomeMessage();
             bool NobodyHasWonTheGameCheck = false; // this has to be a global bool for the while loop
-           
+
             string decidePlayerSymbol = UiMethods.DecidePlayerSymbol(); // stores the Symbol selection in a variable
 
             // might have to change the it just to DecidePLayerSymbol
-            string ValidatePLayerMark = UiMethods.ValidatePlayerInput(Logic.DisplayUpdatedGameGrid(ticTacToeGrid), decidePlayerSymbol); // change userselect to DecidePLayerSymbol
+            string ValidatePLayerMark = UiMethods.ValidatePlayerInputIntoGrid((ticTacToeGrid), decidePlayerSymbol); // change userselect to DecidePLayerSymbol
 
 
             // use this for the save variable for CPu entry  
-            string CpuMarkCheck = Logic.CpuCheck(Logic.DisplayUpdatedGameGrid(ticTacToeGrid), decidePlayerSymbol);
+            string CpuMarkCheck = Logic.CpuCheck((ticTacToeGrid), decidePlayerSymbol);
 
-            while (!Logic.WinGameCheck() && !Logic.allSpacesFilled(ticTacToeGrid) || !NobodyHasWonTheGameCheck)
+            while (!Logic.WinGameCheck(GameConstants.PLAYERCHOICE_O, GameConstants.PLAYERCHOICE_X) && !Logic.allSpacesFilled(ticTacToeGrid) || !NobodyHasWonTheGameCheck)
             {
                 string[,] updatedGameGrid = Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // NOTE: put this elsewhere so that it makes sense in the order of how the game is run
 
@@ -28,19 +28,23 @@ namespace tic_tac_toe
 
                 UiMethods.DisplayTicTacToeGrid(ticTacToeGrid);// this displays the Tictactoe grid
 
-                UiMethods.ValidatePlayerInput(ticTacToeGrid, decidePlayerSymbol); // testing DecidePLayerSymbol() method if not change it 
-                                                                                  //UiMethods.PlacingPlayerEntryOnGrid();
+                UiMethods.ValidatePlayerInputIntoGrid(ticTacToeGrid, decidePlayerSymbol); // testing DecidePLayerSymbol() method if not change it 
+                UiMethods.PlacingPlayerSelectedEntryOnGrid(); //user enters the position on the grid
+                Logic.PlayerWinCheck(ticTacToeGrid);// checks what where the player mark Matches
+
+                Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // shows whats on the grid
+                UiMethods.PromptUserToClearScreen(); // clears the grids
+
+                Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // displays current game0
+                Logic.CpusTurn(ticTacToeGrid);// cpu places mark
+
+
+                UiMethods.PromptUserToClearScreen();
                 Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
-                UiMethods.ClearGridForNewInput(); // clears the grids
 
-                Logic.CpusTurn(ticTacToeGrid);
-
-                UiMethods.ClearGridForNewInput();
-
-                Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 
                 Logic.allSpacesFilled(updatedGameGrid); // the last method to be checked 
-               
+
                 if (checkIfAllSpacesAreFilled)
                 {
                     UiMethods.GameOverMessage();

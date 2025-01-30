@@ -77,7 +77,7 @@ namespace tic_tac_toe
             return PlayerEntryCheck;
         }
 
-        public static void ClearGridForNewInput() // should be placed under UiMethiods
+        public static void PromptUserToClearScreen() // should be placed under UiMethiods
         {
             Console.Clear();
             Console.WriteLine("Please hit Enter To Continue......");
@@ -86,7 +86,7 @@ namespace tic_tac_toe
         //------------------------------------------------------------------------------------------------------------------------//
 
         // this checks if the user enters anything (less or equal to) or (greater or equal) to within the range of 1-9
-        public static int PlacingPlayerEntryOnGrid() // placing entry for user on grid
+        public static int PlacingPlayerSelectedEntryOnGrid() // placing entry for user on grid
         {
             Random rng = new Random(); // random seed
             int numberPositionOnGrid = rng.Next(GameConstants.LOW, GameConstants.HIGH);// this determines the range of the grid positions
@@ -153,10 +153,10 @@ namespace tic_tac_toe
         
 
         ////////-----------------------------------------------------------------------------------////
-        // this Method puts the User Entryon to the updated grid and checks to see if it is valid ///
-        public static string ValidatePlayerInput(string[,] gameGrid, string playerSymbol)
+        // this Method puts the User Entry on to the updated grid and checks to see if it is put on a valid space on the grid ///
+        public static string ValidatePlayerInputIntoGrid(string[,] gameGrid, string playerSymbol)
         {
-            int gridPostion = UiMethods.PlacingPlayerEntryOnGrid(); //gets vaild position from the player
+            int gridPostion = UiMethods.PlacingPlayerSelectedEntryOnGrid(); //gets vaild position from the player
             (int rows, int cols) = MapPostionToGrid(gridPostion.ToString()); // converts the input to a string
 
             if (gameGrid[rows, cols] == " - ") // checks if there is an empty space 
@@ -167,7 +167,7 @@ namespace tic_tac_toe
             else
             {
                 Console.WriteLine("That Position is already occupied please try again");
-                ValidatePlayerInput(gameGrid, playerSymbol); // prompt user in case input isn't valid
+                ValidatePlayerInputIntoGrid(gameGrid, playerSymbol); // prompt user in case input isn't valid
             }
             return playerSymbol;
         }
