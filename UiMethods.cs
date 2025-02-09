@@ -10,6 +10,10 @@ namespace tic_tac_toe
             Console.WriteLine($"Choose {GameConstants.PLAYERCHOICE_X} or {GameConstants.PLAYERCHOICE_O}");
         } // generic display message
 
+        public static void CpuTurnMessage(string CpuLetter)
+        {
+            Console.WriteLine($"CPU: {CpuLetter} is placing it's Mark" );
+        }
         public static void GameOverMessage()
         {
             Console.WriteLine("There are no more Spaces on the grid GameOver");
@@ -22,7 +26,7 @@ namespace tic_tac_toe
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
-                    Console.Write(Grid[rows, cols] = " - ");
+                    Console.Write(Grid[rows, cols] = " _ ");
                 }
                 Console.WriteLine();
             }
@@ -38,41 +42,41 @@ namespace tic_tac_toe
         }
 
         // this will check what the user has put into the entry and will let the user know if valid or not
-        public static string DecidePlayerSymbol()  // this prompts the user to select the mark: X or O
+        public static string DecidePlayerSymbol(out string cpuSymbol)  // this prompts the user to select the mark: X or O
         {
             bool isTheSelectionValid = false;
             string PlayerEntryCheck = UiMethods.UserSelectedMark();
-            string cpuChoiceSymbol = "";
+             cpuSymbol = "";
 
             do
             {
-
                 if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X || PlayerEntryCheck == GameConstants.PLAYERCHOICE_O)
                 {
                     isTheSelectionValid = true;
-
-                    if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X) // the choice makes sure that selection is opposite of CPU selection
+                    // this will assign CPU's symbol based on the players's choice
+                    if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X)
                     {
-                        cpuChoiceSymbol = GameConstants.PLAYERCHOICE_O;
+                        cpuSymbol = GameConstants.PLAYERCHOICE_O;
                     }
 
                     else
                     {
-                        cpuChoiceSymbol = GameConstants.PLAYERCHOICE_X;
+                        cpuSymbol = GameConstants.PLAYERCHOICE_X;
                     }
 
                     Console.WriteLine($"Player has selected: {PlayerEntryCheck}");
-                    Console.WriteLine($"CPU will play as {cpuChoiceSymbol}");
+                    Console.WriteLine($"CPU will play as {cpuSymbol}");
                     Console.WriteLine();
                 }
-
-                if (PlayerEntryCheck != GameConstants.PLAYERCHOICE_X && PlayerEntryCheck != GameConstants.PLAYERCHOICE_O)
+                else
                 {
                     Console.WriteLine(" ERROR Incorrect Entry! :please select either 'O' or 'X' mark");
                     PlayerEntryCheck = UiMethods.UserSelectedMark();
                 }
+               
             }
             while (!isTheSelectionValid);
+
 
             return PlayerEntryCheck;
         }
@@ -150,24 +154,24 @@ namespace tic_tac_toe
         ////////////////////////////////////////////////////////////////////////
 
 
-        
+
 
         ////////-----------------------------------------------------------------------------------////
         // this Method puts the User Entry on to the updated grid and checks to see if it is put on a valid space on the grid ///
-        public static string ValidatePlayerInputIntoGrid(string[,] gameGrid, string playerSymbol)
+        public static string ValidatePlayerInputIntoGrid(string playerSymbol, string[,] gameGrid)
         {
             int gridPostion = UiMethods.PlacingPlayerSelectedEntryOnGrid(); //gets vaild position from the player
-            (int rows, int cols) = MapPostionToGrid(gridPostion.ToString()); // converts the input to a string
+            (int rows, int cols) = MapPostionToGrid(gridPostion.ToString()); // converts the input to a string so thst it can placed into the "string" gameGrid
 
-            if (gameGrid[rows, cols] == " - ") // checks if there is an empty space 
+            if (gameGrid[rows, cols] == " _ ") // checks if there is an empty space 
             {
-                gameGrid[rows, cols] = playerSymbol; // input player symbol into space
+                gameGrid[rows, cols] = playerSymbol; // inputs player symbol into space
                 Console.WriteLine($"You selected a grid position {gridPostion}, on row: {rows} and col: {cols}"); // used for testing purposes
             }
             else
             {
                 Console.WriteLine("That Position is already occupied please try again");
-                ValidatePlayerInputIntoGrid(gameGrid, playerSymbol); // prompt user in case input isn't valid
+                ValidatePlayerInputIntoGrid(playerSymbol, gameGrid); // prompt user in case input isn't valid
             }
             return playerSymbol;
         }

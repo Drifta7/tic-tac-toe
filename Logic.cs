@@ -10,32 +10,33 @@ namespace tic_tac_toe
     {
 
 
-        ///Updated Version of the Grid after Player marked on Grid/////
-        public static void DisplayUpdatedGameGrid(string[,] Grid)
+        ///this Loop updates the PLayer Entry and then Updated the user symbol into the grid then displays it//
+        public static string[,] DisplayUpdatedGameGrid(string[,] Grid)
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
-                    Console.Write($"{Grid[rows, cols]}");
+                    Console.Write($" {Grid[rows, cols]} ");
                 }
                 Console.WriteLine();
             }
-           
+            return Grid;
         }
-        //public static string[,] DisplayUpdatedGameGrid(string[,] Grid)
-        //{
-        //    for (int rows = 0; rows < Grid.GetLength(0); rows++)
-        //    {
-        //        for (int cols = 0; cols < Grid.GetLength(1); cols++)
-        //        {
-        //            Console.Write($"{Grid[rows, cols]}");
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //    return Grid;
-        //}
-        
+        //alternative
+       public void DisplayUpdatedGameGridNow(string[,] Grid)
+        {
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            {
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    Console.Write($" {Grid[rows, cols]} ");
+                }
+                Console.WriteLine();
+            }
+
+        }
+
 
 
         //////// Method checks///////
@@ -64,7 +65,7 @@ namespace tic_tac_toe
                 Console.WriteLine("this space is already occupied, Please select another");
                 //enter player input here not sure what exactly ???
             }
-            if (Grid[rowNum, colNum] == "_") // checks where in the grid the 'placeHolder' is
+            if (Grid[rowNum, colNum] == " _ ") // checks where in the grid the 'placeHolder' is
             {
                 Grid[rowNum, colNum] = PlayerMark; // this is line to place the player mark into the Grid (whether human or CPU) more so cpu
                 return false;
@@ -73,7 +74,7 @@ namespace tic_tac_toe
             return true;
         }
         // this checks if there is an empty space on the grid the Cpu will input its mark on it
-        public static string CpuCheck(string[,] Grid, string CpuMark)
+        public static void CheckForEmptySpaceToPutCpuMark(string[,] Grid, string CpuMark)
         {
             bool isGridMarked = false;
 
@@ -81,10 +82,11 @@ namespace tic_tac_toe
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
-                    if (Grid[rows, cols] == "_")
+                    if (Grid[rows, cols] == " _ ")
                     {
                         Grid[rows, cols] = CpuMark;
                         isGridMarked = true;
+                        Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at {rows},{cols})");
                         break; // so that it breaks out the loop when placed 
                     }
                 }
@@ -93,26 +95,14 @@ namespace tic_tac_toe
                     break; // breaks out of the outer loop
                 }
             }
-            return CpuMark;
+            if (!isGridMarked)
+            {
+                Console.WriteLine("DEBUG: NO Empty Spaces Left for CPU to place a mark");
+            }
+            Console.WriteLine("CPU has placed its mark");
+            DisplayUpdatedGameGrid(Grid);
         }
-        /// I will fix this when the other Logic Is done!!!! //////
-        //public static string SwitchPlayerAndCpuTurns(string PlayerEntryCheck) // this method stored in DecidePlayerSymbol variable
-        //{
-
-        //    bool playerTurnSwitch = false; // put this into a while loop then figure out the logical flow or soemthing
-
-        //    if (PlayerEntryCheck == GameConstants.PLAYERCHOICE_X || PlayerEntryCheck == GameConstants.PLAYERCHOICE_O)
-        //    {
-        //        playerTurnSwitch = true;
-        //        Console.WriteLine($"It is the {PlayerEntryCheck}'s turn");
-        //    }
-        //    else if (PlayerEntryCheck != "x")
-        //    {
-        //        Console.WriteLine($"It is the {PlayerEntryCheck}'s turn");
-        //    }
-
-        //    return PlayerEntryCheck;
-        //}
+      
 
         /////////////////////////////////Checks for Player Position///////////////////////////////////////
         public static void CheckForRowWin(string[,] Grid)
@@ -124,7 +114,7 @@ namespace tic_tac_toe
 
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
-                    if (Grid[rows, cols] != checkPlayerMarkMatch || checkPlayerMarkMatch == "_")
+                    if (Grid[rows, cols] != checkPlayerMarkMatch || checkPlayerMarkMatch == " _ ")
                     {
                         PlayerAllRowMatch = false;
                         break;
@@ -144,7 +134,7 @@ namespace tic_tac_toe
 
             for (int i = 0; i < Grid.GetLength(1); i++)
             {
-                if (Grid[1, i] != firstCenterValue || firstCenterValue == "_")
+                if (Grid[1, i] != firstCenterValue || firstCenterValue == " _ ")
                 {
                     CenterArrayMatches = false;
                     break;
@@ -165,7 +155,7 @@ namespace tic_tac_toe
 
                 for (int rows = 0; rows < Grid.GetLength(1); rows++)
                 {
-                    if (Grid[rows, cols] != checkEqualNUmbers || checkEqualNUmbers == "_")
+                    if (Grid[rows, cols] != checkEqualNUmbers || checkEqualNUmbers == " _ ")
                     {
                         allMatched = false;
                         break;
@@ -185,7 +175,7 @@ namespace tic_tac_toe
 
             for (int i = 0; i < Grid.GetLength(0); i++)
             {
-                if (Grid[i, i] != firstDiagonalValue || firstDiagonalValue == "_")
+                if (Grid[i, i] != firstDiagonalValue || firstDiagonalValue == " _ ")
                 {
                     allDiagonalMatch = false;
                     break;
@@ -204,7 +194,7 @@ namespace tic_tac_toe
 
             for (int i = 0; i < Grid.GetLength(0); i++)
             {
-                if (Grid[i, Grid.GetLength(1) - 1 - i] != firstDiagValue || firstDiagValue == "_")
+                if (Grid[i, Grid.GetLength(1) - 1 - i] != firstDiagValue || firstDiagValue == " _ ")
                 {
                     allDiagMatch = false;
                     break;
@@ -217,7 +207,7 @@ namespace tic_tac_toe
             }
         }
         //------------------ WinCheck ------------------
-        public static bool WinGameCheck(string winnerSymbol, string winnerSymbol2)
+        public static bool WinGameCheck(string winnerSymbol)
         {
             bool winnerIsFound = false;
             if (winnerSymbol == GameConstants.PLAYERCHOICE_X)
@@ -227,7 +217,7 @@ namespace tic_tac_toe
             }
             if (winnerSymbol == GameConstants.PLAYERCHOICE_O)
             {
-                Console.WriteLine($"{winnerSymbol2}... Please Try again");
+                Console.WriteLine($"{winnerSymbol}... Please Try again");
                 winnerIsFound = true;
             }
             else
@@ -245,14 +235,14 @@ namespace tic_tac_toe
         // this will be set to false during the game, when it becomes true then the game will restart with no winners 
         public static bool allSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
-            string GridSpace = "_";
+            string GridSpace = " _ ";
             bool blankspaceLeft = false;
 
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
-                    if (Grid[rows, cols] == GridSpace)
+                    if (Grid[rows, cols] != GridSpace)
                     {
                         blankspaceLeft = true;
                         break;
@@ -286,29 +276,42 @@ namespace tic_tac_toe
 
 
         //---------------------------------------
-        public static void CpusTurn(string[,] ticTacToeGrid)
+        public static void CpusTurn(string[,] Grid)
         {   // use a random "seed" for when there are no matches from the players mark ( namely the CPu)
             // when player selects mark place the Cpu's mark in this function for check when player has 2 makrs in a row or column ( a strategic block)
             // use call function to check if the space is not occupied 
 
             Random rng = new Random(); // random seed for the Cpu to place it's mark
 
+            string cpuMark;
+            string playerMark = UiMethods.DecidePlayerSymbol(out cpuMark); //this is the issue
+         
+            Logic.CheckForEmptySpaceToPutCpuMark(Grid, cpuMark);
+            
+
             int cpuPlaceMarkInSpace = rng.Next(GameConstants.LOW, GameConstants.HIGH);
             string cpuPlaceMarkAsString = cpuPlaceMarkInSpace.ToString(); // used to convert Cpu random entry because cannot put int into a string 
 
-            Logic.PreventOverrideOfMarks((ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
 
-            Logic.CpuCheck((ticTacToeGrid), cpuPlaceMarkAsString);
+                
+            Logic.DisplayUpdatedGameGrid(Grid);
+            //---------___-----_-------____--_-----___--____-____---//
+            Logic.PreventOverrideOfMarks((Grid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
 
-            CheckForRowWin(ticTacToeGrid); // this might not work because this should be checking the " UPDATED GRID" (WIP)
+            Logic.CheckForEmptySpaceToPutCpuMark((Grid), cpuMark); // cannot put this before DisplayupdateGameGrid
 
-            CheckForCenterLineWin(ticTacToeGrid);
-            CheckForColumnsWin(ticTacToeGrid);
+            // Checking for win condition after the cpu's move
+            CheckForRowWin(Grid);
+            CheckForCenterLineWin(Grid);
+            CheckForColumnsWin(Grid);
+            CheckForTopLeftDiagonalWin(Grid);
+            CheckTopRightDiagonalWin(Grid);
 
-            CheckForTopLeftDiagonalWin(ticTacToeGrid);
-            CheckTopRightDiagonalWin(ticTacToeGrid);
-
-            CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
+            CheckForValidInputSymbolInGrid(Grid, GameConstants.NUMBER_OF_ROWS,
+                GameConstants.NUMBER_OF_COLUMNS,
+                GameConstants.PLAYERCHOICE_X,
+                GameConstants.PLAYERCHOICE_O,
+                UiMethods.DecidePlayerSymbol(out cpuMark));
 
             //if space is not occupied then put in the cpu mark on the grid
         }
@@ -316,8 +319,8 @@ namespace tic_tac_toe
         public static void PlayerWinCheck(string[,] ticTacToeGrid)
         {
             Logic.PreventOverrideOfMarks((ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
-            
-           // Logic.CpuCheck(DisplayUpdatedGameGrid(ticTacToeGrid), cpuPlaceMarkAsString);
+
+            // Logic.CpuCheck(DisplayUpdatedGameGrid(ticTacToeGrid), cpuPlaceMarkAsString);
 
             CheckForRowWin(ticTacToeGrid); // this might not work because this should be checking the " UPDATED GRID" (WIP)
 
@@ -327,7 +330,7 @@ namespace tic_tac_toe
             CheckForTopLeftDiagonalWin(ticTacToeGrid);
             CheckTopRightDiagonalWin(ticTacToeGrid);
 
-            CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol());
+            //CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol(out cpu));
 
         }
     }
