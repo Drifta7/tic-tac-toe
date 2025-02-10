@@ -13,13 +13,13 @@ namespace tic_tac_toe
         // this is just a generic message for UI purposes 
         public static void CpuTurnMessage(string CpuLetter)
         {
-            Console.WriteLine($"CPU: {CpuLetter} is placing it's Mark" );
+            Console.WriteLine($"CPU: {CpuLetter} is placing it's Mark....");
         }
         public static void GameOverMessage()
         {
             Console.WriteLine("There are no more Spaces on the grid GameOver");
         }
-        public static string [,]  DisplayTicTacToeGrid(string[,] Grid)
+        public static string[,] DisplayTicTacToeGrid(string[,] Grid)
         {
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
 
@@ -38,7 +38,7 @@ namespace tic_tac_toe
         // the User will input the mark in this method
         public static string UserSelectedMark()
         {
-            string userInput = Console.ReadLine(); // will use this as an argument for playerSelection() method
+            string userInput = Console.ReadLine(); // This is an input for selecting X's or O's
             return userInput;
         }
 
@@ -47,7 +47,7 @@ namespace tic_tac_toe
         {
             bool isTheSelectionValid = false;
             string PlayerEntryCheck = UiMethods.UserSelectedMark();
-             cpuSymbol = "";
+            cpuSymbol = "";
 
             do
             {
@@ -64,7 +64,7 @@ namespace tic_tac_toe
                     {
                         cpuSymbol = GameConstants.PLAYERCHOICE_X;
                     }
-
+                    // confirmation of selection(s) 
                     Console.WriteLine($"Player has selected: {PlayerEntryCheck}");
                     Console.WriteLine($"CPU will play as {cpuSymbol}");
                     Console.WriteLine();
@@ -74,7 +74,7 @@ namespace tic_tac_toe
                     Console.WriteLine(" ERROR Incorrect Entry! :please select either 'O' or 'X' mark");
                     PlayerEntryCheck = UiMethods.UserSelectedMark();
                 }
-               
+
             }
             while (!isTheSelectionValid);
 

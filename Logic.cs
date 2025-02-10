@@ -9,22 +9,7 @@ namespace tic_tac_toe
     class Logic
     {
 
-
-        ///this Loop updates the PLayer Entry and then Updated the user symbol into the grid then displays it//
-        public static string[,] DisplayUpdatedGameGrid(string[,] Grid)
-        {
-            for (int rows = 0; rows < Grid.GetLength(0); rows++)
-            {
-                for (int cols = 0; cols < Grid.GetLength(1); cols++)
-                {
-                    Console.Write($" {Grid[rows, cols]} ");
-                }
-                Console.WriteLine();
-            }
-            return Grid;
-        }
-        //alternative
-       public void DisplayUpdatedGameGridNow(string[,] Grid)
+        public static void DisplayUpdatedGameGrid(string[,] Grid)
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
@@ -74,7 +59,7 @@ namespace tic_tac_toe
             return true;
         }
         // this checks if there is an empty space on the grid the Cpu will input its mark on it
-        public static void CheckForEmptySpaceToPutCpuMark(string[,] Grid, string CpuMark)
+        public static void PlacingCpuMarkOnGrid(string[,] Grid, string CpuMark)
         {
             bool isGridMarked = false;
 
@@ -102,7 +87,7 @@ namespace tic_tac_toe
             Console.WriteLine("CPU has placed its mark");
             DisplayUpdatedGameGrid(Grid);
         }
-      
+
 
         /////////////////////////////////Checks for Player Or Cpu Position///////////////////////////////////////
         public static void CheckForRowWin(string[,] Grid)
@@ -120,6 +105,7 @@ namespace tic_tac_toe
                         break;
                     }
                 }
+                
                 if (PlayerAllRowMatch) //if PLayerAllMatch is true
                 {
                     WinGameCheck(checkPlayerMarkMatch);
@@ -277,61 +263,27 @@ namespace tic_tac_toe
 
         //---------------------------------------
         public static void CpuWinGameChecks(string[,] Grid)
-        {   // use a random "seed" for when there are no matches from the players mark ( namely the CPu)
-            // when player selects mark place the Cpu's mark in this function for check when player has 2 makrs in a row or column ( a strategic block)
-            // use call function to check if the space is not occupied 
-
-            Random rng = new Random(); // random seed for the Cpu to place it's mark
-
-            string cpuMark;
-            string playerMark = UiMethods.DecidePlayerSymbol(out cpuMark); //this is the issue
-         
-            Logic.CheckForEmptySpaceToPutCpuMark(Grid, cpuMark);
-            
-
-            int cpuPlaceMarkInSpace = rng.Next(GameConstants.LOW, GameConstants.HIGH);
-            string cpuPlaceMarkAsString = cpuPlaceMarkInSpace.ToString(); // used to convert Cpu random entry because cannot put int into a string 
-
-
-                
-            Logic.DisplayUpdatedGameGrid(Grid);
-            //---------___-----_-------____--_-----___--____-____---//
-            Logic.PreventOverrideOfMarks((Grid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
-
-           
-
+        {
             // Checking for win condition after the cpu's move
             CheckForRowWin(Grid);
             CheckForCenterLineWin(Grid);
             CheckForColumnsWin(Grid);
             CheckForTopLeftDiagonalWin(Grid);
             CheckTopRightDiagonalWin(Grid);
-
-            CheckForValidInputSymbolInGrid(Grid, GameConstants.NUMBER_OF_ROWS,
-                GameConstants.NUMBER_OF_COLUMNS,
-                GameConstants.PLAYERCHOICE_X,
-                GameConstants.PLAYERCHOICE_O,
-                UiMethods.DecidePlayerSymbol(out cpuMark));
-
-            //if space is not occupied then put in the cpu mark on the grid
         }
-        // will rework this at a later date
-        public static void PlayerWinCheck(string[,] ticTacToeGrid)
+
+        public static void PlayerWinGameCheck(string[,] Grid)
         {
-            Logic.PreventOverrideOfMarks((ticTacToeGrid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
-
-            // Logic.CpuCheck(DisplayUpdatedGameGrid(ticTacToeGrid), cpuPlaceMarkAsString);
-
-            CheckForRowWin(ticTacToeGrid); // this might not work because this should be checking the " UPDATED GRID" (WIP)
-
-            CheckForCenterLineWin(ticTacToeGrid);
-            CheckForColumnsWin(ticTacToeGrid);
-
-            CheckForTopLeftDiagonalWin(ticTacToeGrid);
-            CheckTopRightDiagonalWin(ticTacToeGrid);
-
-            //CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, UiMethods.DecidePlayerSymbol(out cpu));
-
+            // Checking for win condition after the Player's move
+            CheckForRowWin(Grid);
+            CheckForCenterLineWin(Grid);
+            CheckForColumnsWin(Grid);
+            CheckForTopLeftDiagonalWin(Grid);
+            CheckTopRightDiagonalWin(Grid);
         }
     }
 }
+
+
+
+
