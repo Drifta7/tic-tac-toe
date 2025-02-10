@@ -10,6 +10,7 @@ namespace tic_tac_toe
             Console.WriteLine($"Choose {GameConstants.PLAYERCHOICE_X} or {GameConstants.PLAYERCHOICE_O}");
         } // generic display message
 
+        // this is just a generic message for UI purposes 
         public static void CpuTurnMessage(string CpuLetter)
         {
             Console.WriteLine($"CPU: {CpuLetter} is placing it's Mark" );
@@ -18,7 +19,7 @@ namespace tic_tac_toe
         {
             Console.WriteLine("There are no more Spaces on the grid GameOver");
         }
-        public static string[,] DisplayTicTacToeGrid(string[,] Grid)
+        public static string [,]  DisplayTicTacToeGrid(string[,] Grid)
         {
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
 

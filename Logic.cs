@@ -86,7 +86,7 @@ namespace tic_tac_toe
                     {
                         Grid[rows, cols] = CpuMark;
                         isGridMarked = true;
-                        Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at {rows},{cols})");
+                        Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at ({rows},{cols})");
                         break; // so that it breaks out the loop when placed 
                     }
                 }
@@ -104,7 +104,7 @@ namespace tic_tac_toe
         }
       
 
-        /////////////////////////////////Checks for Player Position///////////////////////////////////////
+        /////////////////////////////////Checks for Player Or Cpu Position///////////////////////////////////////
         public static void CheckForRowWin(string[,] Grid)
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
@@ -276,7 +276,7 @@ namespace tic_tac_toe
 
 
         //---------------------------------------
-        public static void CpusTurn(string[,] Grid)
+        public static void CpuWinGameChecks(string[,] Grid)
         {   // use a random "seed" for when there are no matches from the players mark ( namely the CPu)
             // when player selects mark place the Cpu's mark in this function for check when player has 2 makrs in a row or column ( a strategic block)
             // use call function to check if the space is not occupied 
@@ -298,7 +298,7 @@ namespace tic_tac_toe
             //---------___-----_-------____--_-----___--____-____---//
             Logic.PreventOverrideOfMarks((Grid), GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O);
 
-            Logic.CheckForEmptySpaceToPutCpuMark((Grid), cpuMark); // cannot put this before DisplayupdateGameGrid
+           
 
             // Checking for win condition after the cpu's move
             CheckForRowWin(Grid);

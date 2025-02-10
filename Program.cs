@@ -14,29 +14,43 @@ namespace tic_tac_toe
             string cpuMark; // used for save for cpu mark for DecidePlayersymbol.
 
             string decidePlayerSymbol = UiMethods.DecidePlayerSymbol(out cpuMark); // stores the Symbol selection in a variable, and will select opposite of player choice 
-            string[,] updatedGameGrid = UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid
+            UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid
 
 
             // might have to change the it just to DecidePLayerSymbol
-            //string ValidatePLayerMark = UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid); //<----- check if this deciced the CPu mark
+            UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid); //<----- check if this deciced the CPu mark
 
             UiMethods.CpuTurnMessage(cpuMark);
             Console.WriteLine($"DEBUG: CPU Mark is {cpuMark}");
             Console.WriteLine("Before CPU places its mark");
+
+            Logic.CheckForEmptySpaceToPutCpuMark(ticTacToeGrid, cpuMark);
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
+            UiMethods.PromptUserToClearScreen();
 
-
-
+            UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid);
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
+            UiMethods.PromptUserToClearScreen();
 
             Console.WriteLine("DEBUG: CPU is making it's move....");
-            Logic.CheckForEmptySpaceToPutCpuMark(ticTacToeGrid, cpuMark);
+            Logic.CheckForEmptySpaceToPutCpuMark(ticTacToeGrid, cpuMark); // <====== This is where the Cpu is making it's mark 
+            UiMethods.PromptUserToClearScreen();
 
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
             UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid);
+            UiMethods.PromptUserToClearScreen();
 
-            Logic.CheckForEmptySpaceToPutCpuMark(updatedGameGrid, cpuMark);
+            Logic.CheckForEmptySpaceToPutCpuMark(ticTacToeGrid, cpuMark);
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
+            UiMethods.PromptUserToClearScreen();
+
+            Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
+            UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid);
+            UiMethods.PromptUserToClearScreen();
+
+            Logic.CheckForEmptySpaceToPutCpuMark(ticTacToeGrid, cpuMark);
+            Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
+            UiMethods.PromptUserToClearScreen();
 
 
             // use this for the save variable for CPu entry  
@@ -59,7 +73,7 @@ namespace tic_tac_toe
 
             //_---_---____------everything above this line is working correctly with the exception of the "game is a Tie" bug_---_-_-_-____-------//////
 
-            Logic.CpusTurn(updatedGameGrid);
+            Logic.CpuWinGameChecks(ticTacToeGrid);
 
 
             UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid); // testing DecidePLayerSymbol() method if not change it 
@@ -71,13 +85,13 @@ namespace tic_tac_toe
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // shows whats on the grid
             UiMethods.PromptUserToClearScreen(); // clears the grids
 
-            Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // displays current game0
-            Logic.CpusTurn(ticTacToeGrid);// cpu places mark
+            Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // displays current game
+            Logic.CpuWinGameChecks(ticTacToeGrid);// cpu places mark
 
             UiMethods.PromptUserToClearScreen();
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 
-            Logic.allSpacesFilled(updatedGameGrid); // the last method to be checked 
+            Logic.allSpacesFilled(ticTacToeGrid); // the last method to be checked 
 
             //if (checkIfAllSpacesAreFilled)
             //{
