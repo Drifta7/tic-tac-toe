@@ -8,7 +8,6 @@ namespace tic_tac_toe
 {
     class Logic
     {
-
         public static void DisplayUpdatedGameGrid(string[,] Grid)
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
@@ -19,8 +18,8 @@ namespace tic_tac_toe
                 }
                 Console.WriteLine();
             }
-
         }
+
 
 
 
@@ -85,37 +84,45 @@ namespace tic_tac_toe
                 Console.WriteLine("DEBUG: NO Empty Spaces Left for CPU to place a mark");
             }
             Console.WriteLine("CPU has placed its mark");
-            DisplayUpdatedGameGrid(Grid);
+
         }
 
 
         /////////////////////////////////Checks for Player Or Cpu Position///////////////////////////////////////
-        public static void CheckForRowWin(string[,] Grid)
+        public static bool CheckForRowWin(string[,] Grid)
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 string checkPlayerMarkMatch = Grid[rows, 0]; // this checks the 1st element of the rows
+
+                if (checkPlayerMarkMatch == " _ ") // Ensures that it's not an empty space
+                {
+                    continue;
+                }
+
                 bool PlayerAllRowMatch = true;
 
-                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                for (int cols = 1; cols < Grid.GetLength(1); cols++) // starts at 1 and not at the first element
                 {
-                    if (Grid[rows, cols] != checkPlayerMarkMatch || checkPlayerMarkMatch == " _ ")
+                    if (Grid[rows, cols] != checkPlayerMarkMatch || checkPlayerMarkMatch == "_")
                     {
                         PlayerAllRowMatch = false;
                         break;
                     }
                 }
-                
-                if (PlayerAllRowMatch) //if PLayerAllMatch is true
+
+                if (PlayerAllRowMatch) //if PLayerAllMatch is true it then calls the method
                 {
-                    WinGameCheck(checkPlayerMarkMatch);
+
+                    return true; // stop checking further rows since the game is already won.
                 }
             }
+            return false;
         }
 
-        public static void CheckForCenterLineWin(string[,] Grid)
+        public static bool CheckForCenterLineWin(string[,] Grid)
         {
-            string firstCenterValue = Grid[0, 1];
+            string firstCenterValue = Grid[1, 0];
             bool CenterArrayMatches = true;
 
             for (int i = 0; i < Grid.GetLength(1); i++)
@@ -126,20 +133,18 @@ namespace tic_tac_toe
                     break;
                 }
             }
-            if (CenterArrayMatches)
-            {
-                WinGameCheck(firstCenterValue);
-            }
+
+            return CenterArrayMatches; // returns true if all elements in the center line match
         }
 
-        public static void CheckForColumnsWin(string[,] Grid)
+        public static bool CheckForColumnsWin(string[,] Grid)
         {
-            for (int cols = 0; cols < Grid.GetLength(0); cols++)
+            for (int cols = 0; cols < Grid.GetLength(1); cols++)
             {
                 string checkEqualNUmbers = Grid[0, cols];// the first element to compare to
                 bool allMatched = true;
 
-                for (int rows = 0; rows < Grid.GetLength(1); rows++)
+                for (int rows = 0; rows < Grid.GetLength(0); rows++)
                 {
                     if (Grid[rows, cols] != checkEqualNUmbers || checkEqualNUmbers == " _ ")
                     {
@@ -149,14 +154,15 @@ namespace tic_tac_toe
                 }
                 if (allMatched)
                 {
-                    WinGameCheck(checkEqualNUmbers);
+                    return true;
                 }
             }
+            return false;
         }
 
-        public static void CheckForTopLeftDiagonalWin(string[,] Grid)
+        public static bool CheckForTopLeftDiagonalWin(string[,] Grid)
         {
-            string firstDiagonalValue = Grid[0, 0]; // change into an int
+            string firstDiagonalValue = Grid[0, 0];
             bool allDiagonalMatch = true;
 
             for (int i = 0; i < Grid.GetLength(0); i++)
@@ -167,18 +173,15 @@ namespace tic_tac_toe
                     break;
                 }
             }
-            if (allDiagonalMatch)
-            {
-                WinGameCheck(firstDiagonalValue);
-            }
+            return allDiagonalMatch;
         }
 
-        public static void CheckTopRightDiagonalWin(string[,] Grid)
+        public static bool CheckTopRightDiagonalWin(string[,] Grid)
         {
-            string firstDiagValue = Grid[0, Grid.GetLength(1) - 1];
+            string firstDiagValue = Grid[0, Grid.GetLength(1) - 1]; // top-right element 
             bool allDiagMatch = true;
 
-            for (int i = 0; i < Grid.GetLength(0); i++)
+            for (int i = 0; i < Grid.GetLength(0); i++)// loop through diagonal
             {
                 if (Grid[i, Grid.GetLength(1) - 1 - i] != firstDiagValue || firstDiagValue == " _ ")
                 {
@@ -187,62 +190,58 @@ namespace tic_tac_toe
                 }
 
             }
-            if (allDiagMatch)
-            {
-                WinGameCheck(firstDiagValue);
-            }
+            return allDiagMatch;
         }
+
         //------------------ WinCheck ------------------
-        public static bool WinGameCheck(string winnerSymbol)
+        public static bool CheckingForGameWin(string winnerSymbol)
         {
-            bool winnerIsFound = false;
+
             if (winnerSymbol == GameConstants.PLAYERCHOICE_X)
             {
                 Console.WriteLine($"{winnerSymbol} has won");
-                winnerIsFound = true;
+                return true;
             }
             if (winnerSymbol == GameConstants.PLAYERCHOICE_O)
             {
-                Console.WriteLine($"{winnerSymbol}... Please Try again");
-                winnerIsFound = true;
+                Console.WriteLine($"{winnerSymbol} has won");
+                return true;
             }
-            else
-            {
-                Console.WriteLine("The game is a Tie");
-            }
-            return winnerIsFound;
-            //throw new NotImplementedException();
-            // this will check if the user or the computer has won
-            // if (user or computer )
 
+            Console.WriteLine("The game is a Tie");
+            return false;// if there are no winnner
         }
+
+            // this method checks for win
+        
+            
+        public static bool CheckForWin(string[,] Grid, string decidePlayerSymbol)
+        {
+            return CheckForRowWin(Grid) || CheckForColumnsWin(Grid) || CheckForTopLeftDiagonalWin(Grid)
+                    || CheckForTopLeftDiagonalWin(Grid) || CheckForCenterLineWin(Grid);
+        }
+
+
 
         // The method checks if all the spaces are filled and the is not declared winner 
         // this will be set to false during the game, when it becomes true then the game will restart with no winners 
-        public static bool allSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
+        public static bool CheckIfAllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
-            string GridSpace = " _ ";
-            bool blankspaceLeft = false;
+            string emptyGridSpace = " _ ";
 
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
-                    if (Grid[rows, cols] != GridSpace)
+                    if (Grid[rows, cols] == emptyGridSpace)
                     {
-                        blankspaceLeft = true;
-                        break;
+                        return false;
                     }
-                    if (blankspaceLeft)
-                        break; //  break out of the outer loop
-                }
-
-                if (!blankspaceLeft)
-                {
-                    Console.WriteLine("The Game is a Tie");
                 }
             }
-            return !blankspaceLeft;
+
+            Console.WriteLine("The Game is a Tie");
+            return true;
         }
         //-------------------------------------------------------------------------------
 
@@ -264,7 +263,7 @@ namespace tic_tac_toe
         //---------------------------------------
         public static void CpuWinGameChecks(string[,] Grid)
         {
-            // Checking for win condition after the cpu's move
+            // Checking for win conditions after the cpu's move
             CheckForRowWin(Grid);
             CheckForCenterLineWin(Grid);
             CheckForColumnsWin(Grid);
@@ -274,12 +273,19 @@ namespace tic_tac_toe
 
         public static void PlayerWinGameCheck(string[,] Grid)
         {
-            // Checking for win condition after the Player's move
+            // Checking for win conditions after the Player's move
             CheckForRowWin(Grid);
             CheckForCenterLineWin(Grid);
             CheckForColumnsWin(Grid);
             CheckForTopLeftDiagonalWin(Grid);
             CheckTopRightDiagonalWin(Grid);
+        }
+
+        public static bool ValidateInput(string input)
+        {
+            //I need the input to be an int
+            //I need it to be between 1-9
+            return true;
         }
     }
 }

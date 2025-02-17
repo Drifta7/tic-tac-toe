@@ -42,6 +42,16 @@ namespace tic_tac_toe
             return userInput;
         }
 
+        public static void symbolWinnerMessage(string WinnerSymbol)
+        {
+            Console.WriteLine($"{WinnerSymbol} is the winner");
+        }
+
+        public static void InputNumberForGridSpace()
+        {
+            
+        }
+        
         // this will check what the user has put into the entry and will let the user know if valid or not
         public static string DecidePlayerSymbol(out string cpuSymbol)  // this prompts the user to select the mark: X or O
         {
@@ -175,6 +185,13 @@ namespace tic_tac_toe
                 ValidatePlayerInputIntoGrid(playerSymbol, gameGrid); // prompt user in case input isn't valid
             }
             return playerSymbol;
+        }
+
+        public static string GetUserInput()// this is for the validate method
+        {
+            Console.WriteLine("Please provide an input");
+            string input = Console.ReadLine();
+            return input;
         }
     }
 }

@@ -4,7 +4,7 @@ using tic_tac_toe;
 namespace tic_tac_toe
 {
     class Program
-    {// for functionality Ill leave the ticTactoe in Program class, but then will move it to the Main() function 
+    {
         static void Main(string[] args)
         {
             string[,] ticTacToeGrid = new string[GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS]; // 3x3 2d grid 
@@ -14,24 +14,52 @@ namespace tic_tac_toe
 
             string cpuMark; // used for save for cpu mark for DecidePlayersymbol.
             string decidePlayerSymbol = UiMethods.DecidePlayerSymbol(out cpuMark); // stores the Symbol selection in a variable, and will select opposite of player choice 
+            
+            bool isWin = Logic.CheckForWin(ticTacToeGrid,decidePlayerSymbol);
 
-            while (!Logic.WinGameCheck(decidePlayerSymbol) && !Logic.allSpacesFilled(ticTacToeGrid) || !nobodyHasWonTheGameCheck)
+            if (isWin)
             {
-                UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid
+                UiMethods.symbolWinnerMessage(decidePlayerSymbol);
+                //invoke the method that prints the message
+                // which could be the message that in WinCheck
+            }
+
+            string userInput = UiMethods.GetUserInput(); 
+            //invoke a method that will validate input
+            if (!Logic.ValidateInput(userInput))
+            {
+                Console.WriteLine("Input is not valid");
+            }
+            
+            while (!Logic.CheckIfAllSpacesFilled(ticTacToeGrid) && !Logic.CheckForWin(ticTacToeGrid,decidePlayerSymbol) &&!nobodyHasWonTheGameCheck)
+            {
+                UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid (as a blank)
 
                 UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid);
-                UiMethods.DisplayTicTacToeGrid(ticTacToeGrid);
+                Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 
                 UiMethods.CpuTurnMessage(cpuMark);
                 Logic.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark);
                 Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 
-                Logic.CpuWinGameChecks(ticTacToeGrid);
-                Logic.PlayerWinGameCheck(ticTacToeGrid);
+                Logic.CpuWinGameChecks(ticTacToeGrid); // This runs all the checks for the CPU
+                Logic.PlayerWinGameCheck(ticTacToeGrid);// This runs all the checks for the player
 
-                Logic.allSpacesFilled(ticTacToeGrid);
+                if (Logic.CheckingForGameWin(decidePlayerSymbol) || Logic.CheckingForGameWin(cpuMark))
+                {
+                    break; // exits the loop
+                }
+
+                if (Logic.CheckIfAllSpacesFilled(ticTacToeGrid))
+                {
+                    nobodyHasWonTheGameCheck = true;
+                    UiMethods.GameOverMessage();
+                    break;
+                }
 
                 UiMethods.PromptUserToClearScreen();
+                
+
             }
 
             //bool checkIfAllSpacesAreFilled = Logic.allSpacesFilled(Logic.DisplayUpdatedGameGrid(ticTacToeGrid)); // this is what the places the user mark on the grid and displays it
@@ -80,13 +108,8 @@ namespace tic_tac_toe
     //////////__------------------- anything above this line works correctly ---------------------------------------------////
 
 
-    // Logic.SwitchPlayerAndCpuTurns(UiMethods.UserSelectedMark()); // might have to change this later the: UserSelectMark()
-    // Cpu check(s) will follow
-
-    //Logic.CheckForValidInputSymbolInGrid(ticTacToeGrid, GameConstants.NUMBER_OF_ROWS, GameConstants.NUMBER_OF_COLUMNS, GameConstants.PLAYERCHOICE_X, GameConstants.PLAYERCHOICE_O, playerSymbol);
-
-    // idea! = if  the usermakr for CheckForValidInputSymbolInGrid is true then use that to switch to the other user, then test it out
-
+    
+   
 
 
 
