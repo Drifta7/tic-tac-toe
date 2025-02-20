@@ -154,6 +154,7 @@ namespace tic_tac_toe
                 }
                 if (allMatched)
                 {
+                    Console.WriteLine("The player has won"); // testing purposes 
                     return true;
                 }
             }
@@ -172,6 +173,10 @@ namespace tic_tac_toe
                     allDiagonalMatch = false;
                     break;
                 }
+            }
+            if (allDiagonalMatch) // testing if this will work to follow the same format as "check for column wins
+            {
+                return true;
             }
             return allDiagonalMatch;
         }
@@ -225,7 +230,7 @@ namespace tic_tac_toe
 
         // The method checks if all the spaces are filled and the is not declared winner 
         // this will be set to false during the game, when it becomes true then the game will restart with no winners 
-        public static bool CheckIfAllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
+        public static bool CheckingIfAllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
             string emptyGridSpace = " _ ";
 
@@ -252,7 +257,7 @@ namespace tic_tac_toe
             {
                 Console.WriteLine("This space is already occupied, PLease select another space");
 
-                int newEntry = UiMethods.PlacingPlayerSelectedEntryOnGrid(); // this will deal with selecting number to the grid
+                int newEntry = UiMethods.ValidatePlayerInputIntoGrid(); // this will deal with selecting number to the grid
 
                 rowNum = (newEntry - 1) / Grid.GetLength(1);
                 colsNum = (newEntry - 1) % Grid.GetLength(1);

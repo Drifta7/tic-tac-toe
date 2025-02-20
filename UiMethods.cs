@@ -47,11 +47,13 @@ namespace tic_tac_toe
             Console.WriteLine($"{WinnerSymbol} is the winner");
         }
 
-        public static void InputNumberForGridSpace()
+        public static string InputNumberForGridSpace()
         {
-            
+            string numberForGridInput = Console.ReadLine();
+            return numberForGridInput;
         }
-        
+
+
         // this will check what the user has put into the entry and will let the user know if valid or not
         public static string DecidePlayerSymbol(out string cpuSymbol)  // this prompts the user to select the mark: X or O
         {
@@ -101,7 +103,7 @@ namespace tic_tac_toe
         //------------------------------------------------------------------------------------------------------------------------//
 
         // this checks if the user enters anything (less or equal to) or (greater or equal) to within the range of 1-9
-        public static int PlacingPlayerSelectedEntryOnGrid() // placing entry for user on grid
+        public static int ValidatePlayerInputIntoGrid() // placing entry for user on grid
         {
             Random rng = new Random(); // random seed
             int numberPositionOnGrid = rng.Next(GameConstants.LOW, GameConstants.HIGH);// this determines the range of the grid positions
@@ -169,9 +171,9 @@ namespace tic_tac_toe
 
         ////////-----------------------------------------------------------------------------------////
         // this Method puts the User Entry on to the updated grid and checks to see if it is put on a valid space on the grid ///
-        public static string ValidatePlayerInputIntoGrid(string playerSymbol, string[,] gameGrid)
+        public static string PlacingUserMarkIntoGrid(string playerSymbol, string[,] gameGrid)
         {
-            int gridPostion = UiMethods.PlacingPlayerSelectedEntryOnGrid(); //gets vaild position from the player
+            int gridPostion = UiMethods.ValidatePlayerInputIntoGrid(); //gets vaild position from the player
             (int rows, int cols) = MapPostionToGrid(gridPostion.ToString()); // converts the input to a string so thst it can placed into the "string" gameGrid
 
             if (gameGrid[rows, cols] == " _ ") // checks if there is an empty space 
@@ -182,7 +184,7 @@ namespace tic_tac_toe
             else
             {
                 Console.WriteLine("That Position is already occupied please try again");
-                ValidatePlayerInputIntoGrid(playerSymbol, gameGrid); // prompt user in case input isn't valid
+                PlacingUserMarkIntoGrid(playerSymbol, gameGrid); // prompt user in case input isn't valid
             }
             return playerSymbol;
         }

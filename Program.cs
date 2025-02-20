@@ -17,13 +17,7 @@ namespace tic_tac_toe
             
             bool isWin = Logic.CheckForWin(ticTacToeGrid,decidePlayerSymbol);
 
-            if (isWin)
-            {
-                UiMethods.symbolWinnerMessage(decidePlayerSymbol);
-                //invoke the method that prints the message
-                // which could be the message that in WinCheck
-            }
-
+         
             string userInput = UiMethods.GetUserInput(); 
             //invoke a method that will validate input
             if (!Logic.ValidateInput(userInput))
@@ -31,31 +25,59 @@ namespace tic_tac_toe
                 Console.WriteLine("Input is not valid");
             }
             
-            while (!Logic.CheckIfAllSpacesFilled(ticTacToeGrid) && !Logic.CheckForWin(ticTacToeGrid,decidePlayerSymbol) &&!nobodyHasWonTheGameCheck)
+          // while (!Logic.CheckingIfAllSpacesFilled(ticTacToeGrid) && !Logic.CheckForWin(ticTacToeGrid,decidePlayerSymbol) &&!nobodyHasWonTheGameCheck)
             {
                 UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid (as a blank)
 
-                UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid);
+                UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid);
                 Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 
                 UiMethods.CpuTurnMessage(cpuMark);
                 Logic.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark);
                 Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 
+
+                UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid);
+                Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
+
                 Logic.CpuWinGameChecks(ticTacToeGrid); // This runs all the checks for the CPU
                 Logic.PlayerWinGameCheck(ticTacToeGrid);// This runs all the checks for the player
 
-                if (Logic.CheckingForGameWin(decidePlayerSymbol) || Logic.CheckingForGameWin(cpuMark))
-                {
-                    break; // exits the loop
-                }
+                UiMethods.CpuTurnMessage(cpuMark);
+                Logic.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark);
+                Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
 
-                if (Logic.CheckIfAllSpacesFilled(ticTacToeGrid))
-                {
-                    nobodyHasWonTheGameCheck = true;
-                    UiMethods.GameOverMessage();
-                    break;
-                }
+
+                UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid);
+                Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
+                Logic.PlayerWinGameCheck(ticTacToeGrid);// This runs all the checks for the player
+
+                UiMethods.CpuTurnMessage(cpuMark);
+                Logic.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark);
+                Logic.DisplayUpdatedGameGrid(ticTacToeGrid);
+
+                Logic.CheckForWin(ticTacToeGrid,decidePlayerSymbol);
+
+                //if (Logic.CheckingForGameWin(decidePlayerSymbol) || Logic.CheckingForGameWin(cpuMark))
+                //{
+                //    break; // exits the loop
+                //}
+
+                //if (Logic.CheckingIfAllSpacesFilled(ticTacToeGrid)) // if this is true
+                //{
+                //    nobodyHasWonTheGameCheck = true;
+                //    UiMethods.GameOverMessage();
+                //    break; // breaks out of the loop 
+                //}
+
+                //if (isWin)
+                //{
+                //    UiMethods.symbolWinnerMessage(decidePlayerSymbol);
+                //    //invoke the method that prints the message
+                //    // which could be the message that in WinCheck
+                //}
+                //else
+                //    continue;
 
                 UiMethods.PromptUserToClearScreen();
                 
@@ -76,7 +98,7 @@ namespace tic_tac_toe
             Logic.CpuWinGameChecks(ticTacToeGrid);
 
 
-            UiMethods.ValidatePlayerInputIntoGrid(decidePlayerSymbol, ticTacToeGrid); // testing DecidePLayerSymbol() method if not change it 
+            UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid); // testing DecidePLayerSymbol() method if not change it 
             Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // testing out placement of this method
 
             //UiMethods.PlacingPlayerSelectedEntryOnGrid(); //user enters the position on the grid
