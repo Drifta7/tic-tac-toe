@@ -42,9 +42,10 @@ namespace tic_tac_toe
             return userInput;
         }
 
-        public static void symbolWinnerMessage(string WinnerSymbol)
+        public static string symbolOfWinnerMessage(string WinnerSymbol) // for this put in perhaps PLayersymbol method or the variable
         {
             Console.WriteLine($"{WinnerSymbol} is the winner");
+            return WinnerSymbol;
         }
 
         public static string InputNumberForGridSpace()

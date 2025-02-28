@@ -113,7 +113,6 @@ namespace tic_tac_toe
 
                 if (PlayerAllRowMatch) //if PLayerAllMatch is true it then calls the method
                 {
-
                     return true; // stop checking further rows since the game is already won.
                 }
             }
@@ -154,7 +153,7 @@ namespace tic_tac_toe
                 }
                 if (allMatched)
                 {
-                    Console.WriteLine("The player has won"); // testing purposes 
+                    Console.WriteLine("The player has won"); // testing purposes:works when matched 
                     return true;
                 }
             }
@@ -286,12 +285,7 @@ namespace tic_tac_toe
             CheckTopRightDiagonalWin(Grid);
         }
 
-        public static bool ValidateInput(string input)
-        {
-            //I need the input to be an int
-            //I need it to be between 1-9
-            return true;
-        }
+       
     }
 }
 
