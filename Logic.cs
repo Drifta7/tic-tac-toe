@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace tic_tac_toe
 {
@@ -104,7 +100,7 @@ namespace tic_tac_toe
 
                 for (int cols = 1; cols < Grid.GetLength(1); cols++) // starts at 1 and not at the first element
                 {
-                    if (Grid[rows, cols] != checkPlayerMarkMatch || checkPlayerMarkMatch == "_")
+                    if (Grid[rows, cols] != checkPlayerMarkMatch)
                     {
                         PlayerAllRowMatch = false;
                         break;
@@ -123,16 +119,20 @@ namespace tic_tac_toe
         {
             string firstCenterValue = Grid[1, 0];
             bool CenterArrayMatches = true;
-
-            for (int i = 0; i < Grid.GetLength(1); i++)
+           
+            if (firstCenterValue == " _ ")
             {
-                if (Grid[1, i] != firstCenterValue || firstCenterValue == " _ ")
+                return false;
+            }
+            
+            for (int i = 1; i < Grid.GetLength(1); i++)
+            {
+                if (Grid[1, i] != firstCenterValue)
                 {
                     CenterArrayMatches = false;
                     break;
                 }
             }
-
             return CenterArrayMatches; // returns true if all elements in the center line match
         }
 
@@ -194,6 +194,10 @@ namespace tic_tac_toe
                 }
 
             }
+            if (allDiagMatch)
+            {
+                return true;
+            }
             return allDiagMatch;
         }
 
@@ -216,14 +220,15 @@ namespace tic_tac_toe
             return false;// if there are no winnner
         }
 
-            // this method checks for win
-        
-            
+        // this method checks for win
+
+
         public static bool CheckForWin(string[,] Grid, string decidePlayerSymbol)
         {
             return CheckForRowWin(Grid) || CheckForColumnsWin(Grid) || CheckForTopLeftDiagonalWin(Grid)
-                    || CheckForTopLeftDiagonalWin(Grid) || CheckForCenterLineWin(Grid);
+                    || CheckTopRightDiagonalWin(Grid) || CheckForCenterLineWin(Grid);
         }
+        
 
 
 
@@ -231,21 +236,22 @@ namespace tic_tac_toe
         // this will be set to false during the game, when it becomes true then the game will restart with no winners 
         public static bool CheckingIfAllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
-            string emptyGridSpace = " _ ";
+
 
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
-                    if (Grid[rows, cols] == emptyGridSpace)
+                    if (Grid[rows, cols] != GameConstants.PLAYERCHOICE_O && Grid[rows, cols] != GameConstants.PLAYERCHOICE_X) // checks to see if the grid is filled with x's and o's
                     {
-                        return false;
+                       return false; // found and empty space grid not full yet
                     }
+
                 }
             }
 
             Console.WriteLine("The Game is a Tie");
-            return true;
+            return true; // grid is full
         }
         //-------------------------------------------------------------------------------
 
@@ -285,7 +291,7 @@ namespace tic_tac_toe
             CheckTopRightDiagonalWin(Grid);
         }
 
-       
+
     }
 }
 

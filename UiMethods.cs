@@ -19,7 +19,7 @@ namespace tic_tac_toe
         {
             Console.WriteLine("There are no more Spaces on the grid GameOver");
         }
-        public static string[,] DisplayTicTacToeGrid(string[,] Grid)
+        public static void DisplayTicTacToeGrid(string[,] Grid)
         {
             //////// this is to diplay the tic-tac-toe grid//////////////////////////
 
@@ -31,7 +31,7 @@ namespace tic_tac_toe
                 }
                 Console.WriteLine();
             }
-            return Grid;
+           
         }
 
 
