@@ -4,84 +4,8 @@ namespace tic_tac_toe
 {
     class Logic
     {
-        public static void DisplayUpdatedGameGrid(string[,] Grid)
-        {
-            for (int rows = 0; rows < Grid.GetLength(0); rows++)
-            {
-                for (int cols = 0; cols < Grid.GetLength(1); cols++)
-                {
-                    Console.Write($" {Grid[rows, cols]} ");
-                }
-                Console.WriteLine();
-            }
-        }
 
 
-
-
-        //////// Method checks///////
-        /// <summary>
-        ///  Checks for spaces on the grid that is already occupied on the TicTacToeDisplay.
-        /// </summary>
-        /// <param name="Grid">Enter a string array</param>
-        /// <param name="rowNum">Enter the NUMBEROFROWS from GameConstants</param>
-        /// <param name="colNum">Enter the NUMBERORCOLOUMNS from GameConstants</param>
-        /// <param name="Playersymbol"> Enter PLAYERCHOICE_X</param>
-        /// <param name="Playersymbol2">Enter PLAYERCHOICE_O</param>
-        /// <param name="PlayerMark"> Enter DecidePlayerSymbol() method</param>
-
-        // this Method will check to see if the space on the grid is already occupied || Note this most likely will be used by the CPU
-        public static bool CheckForValidInputSymbolInGrid(string[,] Grid, int rowNum, int colNum, string Playersymbol, string Playersymbol2, string PlayerMark) // (originally void) boolean was already set to true
-        {
-            // this check that the userInput is in bounds of the Grid anything outside will cause an error
-            if (rowNum < 0 || rowNum >= Grid.GetLength(0) || colNum < 0 || colNum >= Grid.GetLength(1))
-            {
-                Console.WriteLine("Invaild Position, Please select a vaild position");
-                return true;
-            }
-
-            if (Grid[rowNum, colNum] == Playersymbol || Grid[rowNum, colNum] == Playersymbol2) // checks if the space is valid for playerMark entry 
-            {
-                Console.WriteLine("this space is already occupied, Please select another");
-                //enter player input here not sure what exactly ???
-            }
-            if (Grid[rowNum, colNum] == " _ ") // checks where in the grid the 'placeHolder' is
-            {
-                Grid[rowNum, colNum] = PlayerMark; // this is line to place the player mark into the Grid (whether human or CPU) more so cpu
-                return false;
-            }
-            Console.WriteLine("Unexpected Error ");
-            return true;
-        }
-        // this checks if there is an empty space on the grid the Cpu will input its mark on it
-        public static void PlacingCpuMarkOnGrid(string[,] Grid, string CpuMark)
-        {
-            bool isGridMarked = false;
-
-            for (int rows = 0; rows < Grid.GetLength(0); rows++)
-            {
-                for (int cols = 0; cols < Grid.GetLength(1); cols++)
-                {
-                    if (Grid[rows, cols] == " _ ")
-                    {
-                        Grid[rows, cols] = CpuMark;
-                        isGridMarked = true;
-                        Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at ({rows},{cols})");
-                        break; // so that it breaks out the loop when placed 
-                    }
-                }
-                if (isGridMarked)
-                {
-                    break; // breaks out of the outer loop
-                }
-            }
-            if (!isGridMarked)
-            {
-                Console.WriteLine("DEBUG: NO Empty Spaces Left for CPU to place a mark");
-            }
-            Console.WriteLine("CPU has placed its mark");
-
-        }
 
 
         /////////////////////////////////Checks for Player Or Cpu Position///////////////////////////////////////
@@ -119,12 +43,12 @@ namespace tic_tac_toe
         {
             string firstCenterValue = Grid[1, 0];
             bool CenterArrayMatches = true;
-           
+
             if (firstCenterValue == " _ ")
             {
                 return false;
             }
-            
+
             for (int i = 1; i < Grid.GetLength(1); i++)
             {
                 if (Grid[1, i] != firstCenterValue)
@@ -228,25 +152,19 @@ namespace tic_tac_toe
             return CheckForRowWin(Grid) || CheckForColumnsWin(Grid) || CheckForTopLeftDiagonalWin(Grid)
                     || CheckTopRightDiagonalWin(Grid) || CheckForCenterLineWin(Grid);
         }
-        
-
-
 
         // The method checks if all the spaces are filled and the is not declared winner 
         // this will be set to false during the game, when it becomes true then the game will restart with no winners 
         public static bool CheckingIfAllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
         {
-
-
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
             {
                 for (int cols = 0; cols < Grid.GetLength(1); cols++)
                 {
                     if (Grid[rows, cols] != GameConstants.PLAYERCHOICE_O && Grid[rows, cols] != GameConstants.PLAYERCHOICE_X) // checks to see if the grid is filled with x's and o's
                     {
-                       return false; // found and empty space grid not full yet
+                        return false; // found and empty space grid not full yet
                     }
-
                 }
             }
 
@@ -290,8 +208,6 @@ namespace tic_tac_toe
             CheckForTopLeftDiagonalWin(Grid);
             CheckTopRightDiagonalWin(Grid);
         }
-
-
     }
 }
 

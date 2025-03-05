@@ -18,15 +18,15 @@ namespace tic_tac_toe
 
             bool isWin = Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol);
 
-                UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid (as a blank) KEEP!
+            UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid (as a blank) KEEP!
 
             while (!nobodyHasWonTheGameCheck || !isWin)
             {
-           
-                
+
+
                 //player's turn
                 UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid); // KEEP
-                Logic.DisplayUpdatedGameGrid(ticTacToeGrid); // KEEP
+                UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); // KEEP
 
                 isWin = Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol); //  Check win after User move 
 
@@ -45,8 +45,8 @@ namespace tic_tac_toe
                 // Cpu's Turn
                 UiMethods.CpuTurnMessage(cpuMark); // KEEP
 
-                Logic.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark); //KEEP
-                Logic.DisplayUpdatedGameGrid(ticTacToeGrid); //KEEP
+                UiMethods.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark); //KEEP
+                UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); //KEEP
 
                 Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol);
 
@@ -67,16 +67,14 @@ namespace tic_tac_toe
             }
 
             UiMethods.PromptUserToClearScreen();
-        
-        
         }
     }
 }
-    
 
 
 
-       
+
+
 
 
 

@@ -33,7 +33,45 @@ namespace tic_tac_toe
             }
            
         }
+        public static void PlacingCpuMarkOnGrid(string[,] Grid, string CpuMark)
+        {
+            bool isGridMarked = false;
 
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            {
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    if (Grid[rows, cols] == " _ ")
+                    {
+                        Grid[rows, cols] = CpuMark;
+                        isGridMarked = true;
+                        Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at ({rows},{cols})");
+                        break; // so that it breaks out the loop when placed 
+                    }
+                }
+                if (isGridMarked)
+                {
+                    break; // breaks out of the outer loop
+                }
+            }
+            if (!isGridMarked)
+            {
+                Console.WriteLine("DEBUG: NO Empty Spaces Left for CPU to place a mark");
+            }
+            Console.WriteLine("CPU has placed its mark");
+        }
+
+        public static void DisplayUpdatedGameGrid(string[,] Grid)
+        {
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            {
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    Console.Write($" {Grid[rows, cols]} ");
+                }
+                Console.WriteLine();
+            }
+        }
 
         // the User will input the mark in this method
         public static string UserSelectedMark()
@@ -47,13 +85,6 @@ namespace tic_tac_toe
             Console.WriteLine($"{WinnerSymbol} is the winner");
             return WinnerSymbol;
         }
-
-        public static string InputNumberForGridSpace()
-        {
-            string numberForGridInput = Console.ReadLine();
-            return numberForGridInput;
-        }
-
 
         // this will check what the user has put into the entry and will let the user know if valid or not
         public static string DecidePlayerSymbol(out string cpuSymbol)  // this prompts the user to select the mark: X or O
@@ -90,7 +121,6 @@ namespace tic_tac_toe
 
             }
             while (!isTheSelectionValid);
-
 
             return PlayerEntryCheck;
         }
