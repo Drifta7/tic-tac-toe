@@ -5,8 +5,59 @@ namespace tic_tac_toe
     class Logic
     {
 
+        public static void PlacingCpuMarkOnGrid(string[,] Grid, string CpuMark)
+        {
+            bool isGridMarked = false;
 
+            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            {
+                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                {
+                    if (Grid[rows, cols] == " _ ")
+                    {
+                        Grid[rows, cols] = CpuMark;
+                        isGridMarked = true;
+                        Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at ({rows},{cols})");
+                        break; // so that it breaks out the loop when placed 
+                    }
+                }
+                if (isGridMarked)
+                {
+                    break; // breaks out of the outer loop
+                }
+            }
+            if (!isGridMarked)
+            {
+                Console.WriteLine("DEBUG: NO Empty Spaces Left for CPU to place a mark");
+            }
+            Console.WriteLine("CPU has placed its mark");
+        }
 
+        // this will make the Grid dynamic by not hard coding the elements and user selecting where to put their mark
+        public static (int, int) MapPostionToGrid(string position)
+        {
+            if (int.TryParse(position, out int GridPosition))
+            {
+                int totalCells = GameConstants.NUMBER_OF_ROWS * GameConstants.NUMBER_OF_COLUMNS;
+
+                if (GridPosition >= 1 && GridPosition <= totalCells) // used to make sure that the entry selection remains inbounds to the Grid array
+                {
+                    int rows = (GridPosition - 1) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
+                    int cols = (GridPosition - 1) % GameConstants.NUMBER_OF_COLUMNS;
+                    return (rows, cols);
+                }
+
+                else
+                {
+                    throw new ArgumentException("Invaild Input, please enter a Vaild number");
+                }
+            }
+
+            else
+            {
+                throw new ArgumentException("Invaild input");
+            }
+        }
 
         /////////////////////////////////Checks for Player Or Cpu Position///////////////////////////////////////
         public static bool CheckForRowWin(string[,] Grid)
@@ -116,7 +167,6 @@ namespace tic_tac_toe
                     allDiagMatch = false;
                     break;
                 }
-
             }
             if (allDiagMatch)
             {
@@ -170,43 +220,6 @@ namespace tic_tac_toe
 
             Console.WriteLine("The Game is a Tie");
             return true; // grid is full
-        }
-        //-------------------------------------------------------------------------------
-
-
-        public static void PreventOverrideOfMarks(string[,] Grid, int rowNum, int colsNum, string playerSymbol, string playerSymbol2) // this will use the updated game grid 
-        {
-            while (Grid[rowNum, colsNum] == playerSymbol || Grid[rowNum, colsNum] == playerSymbol2) // whether human player or CPU entry
-            {
-                Console.WriteLine("This space is already occupied, PLease select another space");
-
-                int newEntry = UiMethods.ValidatePlayerInputIntoGrid(); // this will deal with selecting number to the grid
-
-                rowNum = (newEntry - 1) / Grid.GetLength(1);
-                colsNum = (newEntry - 1) % Grid.GetLength(1);
-            }
-        }
-
-
-        //---------------------------------------
-        public static void CpuWinGameChecks(string[,] Grid)
-        {
-            // Checking for win conditions after the cpu's move
-            CheckForRowWin(Grid);
-            CheckForCenterLineWin(Grid);
-            CheckForColumnsWin(Grid);
-            CheckForTopLeftDiagonalWin(Grid);
-            CheckTopRightDiagonalWin(Grid);
-        }
-
-        public static void PlayerWinGameCheck(string[,] Grid)
-        {
-            // Checking for win conditions after the Player's move
-            CheckForRowWin(Grid);
-            CheckForCenterLineWin(Grid);
-            CheckForColumnsWin(Grid);
-            CheckForTopLeftDiagonalWin(Grid);
-            CheckTopRightDiagonalWin(Grid);
         }
     }
 }

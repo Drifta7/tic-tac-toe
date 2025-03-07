@@ -18,35 +18,33 @@ namespace tic_tac_toe
 
             bool isWin = Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol);
 
-            UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid (as a blank) KEEP!
+            UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid (as a blank) 
 
             while (!nobodyHasWonTheGameCheck || !isWin)
             {
-
-
                 //player's turn
-                UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid); // KEEP
-                UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); // KEEP
+                UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid); 
+                UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); 
 
                 isWin = Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol); //  Check win after User move 
 
                 if (isWin)
                 {
-                    UiMethods.symbolOfWinnerMessage(decidePlayerSymbol);
+                    UiMethods.DisplaySymbolOfWinnerMessage(decidePlayerSymbol);
                     break;
                 }
                 hasAllTheSpacesBeenFilled = Logic.CheckingIfAllSpacesFilled(ticTacToeGrid);
                 if (hasAllTheSpacesBeenFilled)
                 {
-                    UiMethods.GameOverMessage();
+                    UiMethods.DisplayGameOverMessage();
                     break;
                 }
 
                 // Cpu's Turn
-                UiMethods.CpuTurnMessage(cpuMark); // KEEP
+                UiMethods.DisplayCpuTurnsMessage(cpuMark); 
 
-                UiMethods.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark); //KEEP
-                UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); //KEEP
+                Logic.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark); 
+                UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); 
 
                 Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol);
 
@@ -54,16 +52,15 @@ namespace tic_tac_toe
 
                 if (isWin)
                 {
-                    UiMethods.symbolOfWinnerMessage(cpuMark);
+                    UiMethods.DisplaySymbolOfWinnerMessage(cpuMark);
                     break; // this is for the while loop break
                 }
 
                 if (hasAllTheSpacesBeenFilled) // might have to update
                 {
-                    UiMethods.GameOverMessage();
+                    UiMethods.DisplayGameOverMessage();
                     break;
                 }
-
             }
 
             UiMethods.PromptUserToClearScreen();

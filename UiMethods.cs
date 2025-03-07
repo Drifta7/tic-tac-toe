@@ -11,11 +11,11 @@ namespace tic_tac_toe
         } // generic display message
 
         // this is just a generic message for UI purposes 
-        public static void CpuTurnMessage(string CpuLetter)
+        public static void DisplayCpuTurnsMessage(string CpuLetter)
         {
             Console.WriteLine($"CPU: {CpuLetter} is placing it's Mark....");
         }
-        public static void GameOverMessage()
+        public static void DisplayGameOverMessage()
         {
             Console.WriteLine("There are no more Spaces on the grid GameOver");
         }
@@ -33,34 +33,7 @@ namespace tic_tac_toe
             }
            
         }
-        public static void PlacingCpuMarkOnGrid(string[,] Grid, string CpuMark)
-        {
-            bool isGridMarked = false;
-
-            for (int rows = 0; rows < Grid.GetLength(0); rows++)
-            {
-                for (int cols = 0; cols < Grid.GetLength(1); cols++)
-                {
-                    if (Grid[rows, cols] == " _ ")
-                    {
-                        Grid[rows, cols] = CpuMark;
-                        isGridMarked = true;
-                        Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at ({rows},{cols})");
-                        break; // so that it breaks out the loop when placed 
-                    }
-                }
-                if (isGridMarked)
-                {
-                    break; // breaks out of the outer loop
-                }
-            }
-            if (!isGridMarked)
-            {
-                Console.WriteLine("DEBUG: NO Empty Spaces Left for CPU to place a mark");
-            }
-            Console.WriteLine("CPU has placed its mark");
-        }
-
+        
         public static void DisplayUpdatedGameGrid(string[,] Grid)
         {
             for (int rows = 0; rows < Grid.GetLength(0); rows++)
@@ -74,13 +47,13 @@ namespace tic_tac_toe
         }
 
         // the User will input the mark in this method
-        public static string UserSelectedMark()
+        public static string SelectGameMark()
         {
             string userInput = Console.ReadLine(); // This is an input for selecting X's or O's
             return userInput;
         }
 
-        public static string symbolOfWinnerMessage(string WinnerSymbol) // for this put in perhaps PLayersymbol method or the variable
+        public static string DisplaySymbolOfWinnerMessage(string WinnerSymbol) // for this put in perhaps PLayersymbol method or the variable
         {
             Console.WriteLine($"{WinnerSymbol} is the winner");
             return WinnerSymbol;
@@ -90,7 +63,7 @@ namespace tic_tac_toe
         public static string DecidePlayerSymbol(out string cpuSymbol)  // this prompts the user to select the mark: X or O
         {
             bool isTheSelectionValid = false;
-            string PlayerEntryCheck = UiMethods.UserSelectedMark();
+            string PlayerEntryCheck = UiMethods.SelectGameMark();
             cpuSymbol = "";
 
             do
@@ -116,7 +89,7 @@ namespace tic_tac_toe
                 else
                 {
                     Console.WriteLine(" ERROR Incorrect Entry! :please select either 'O' or 'X' mark");
-                    PlayerEntryCheck = UiMethods.UserSelectedMark();
+                    PlayerEntryCheck = UiMethods.SelectGameMark();
                 }
 
             }
@@ -168,32 +141,7 @@ namespace tic_tac_toe
         //------------------------------------------------------------------------------------------------------------------//
 
 
-        // this will make the Grid dynamic by not hard coding the elements and user selecting where to put their mark
-        public static (int, int) MapPostionToGrid(string position)
-
-        {
-            if (int.TryParse(position, out int GridPosition))
-            {
-                int totalCells = GameConstants.NUMBER_OF_ROWS * GameConstants.NUMBER_OF_COLUMNS;
-
-                if (GridPosition >= 1 && GridPosition <= totalCells) // used to make sure that the entry selection remains inbounds to the Grid array
-                {
-                    int rows = (GridPosition - 1) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
-                    int cols = (GridPosition - 1) % GameConstants.NUMBER_OF_COLUMNS;
-                    return (rows, cols);
-                }
-
-                else
-                {
-                    throw new ArgumentException("Invaild Input, please enter a Vaild number");
-                }
-            }
-
-            else
-            {
-                throw new ArgumentException("Invaild input");
-            }
-        }
+       
 
         ////////////////////////////////////////////////////////////////////////
 
@@ -205,7 +153,7 @@ namespace tic_tac_toe
         public static string PlacingUserMarkIntoGrid(string playerSymbol, string[,] gameGrid)
         {
             int gridPostion = UiMethods.ValidatePlayerInputIntoGrid(); //gets vaild position from the player
-            (int rows, int cols) = MapPostionToGrid(gridPostion.ToString()); // converts the input to a string so thst it can placed into the "string" gameGrid
+            (int rows, int cols) = Logic.MapPostionToGrid(gridPostion.ToString()); // converts the input to a string so thst it can placed into the "string" gameGrid
 
             if (gameGrid[rows, cols] == " _ ") // checks if there is an empty space 
             {
@@ -218,13 +166,6 @@ namespace tic_tac_toe
                 PlacingUserMarkIntoGrid(playerSymbol, gameGrid); // prompt user in case input isn't valid
             }
             return playerSymbol;
-        }
-
-        public static string GetUserInput()// this is for the validate method
-        {
-            Console.WriteLine("Please provide an input");
-            string input = Console.ReadLine();
-            return input;
         }
     }
 }
