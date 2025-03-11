@@ -17,7 +17,7 @@ namespace tic_tac_toe
                     {
                         Grid[rows, cols] = CpuMark;
                         isGridMarked = true;
-                        Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at ({rows},{cols})");
+                        //Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at ({rows},{cols})");
                         break; // so that it breaks out the loop when placed 
                     }
                 }
@@ -28,9 +28,9 @@ namespace tic_tac_toe
             }
             if (!isGridMarked)
             {
-                Console.WriteLine("DEBUG: NO Empty Spaces Left for CPU to place a mark");
+                // Console.WriteLine("DEBUG: NO Empty Spaces Left for CPU to place a mark");
             }
-            Console.WriteLine("CPU has placed its mark");
+            // Console.WriteLine("CPU has placed its mark");
         }
 
         // this will make the Grid dynamic by not hard coding the elements and user selecting where to put their mark
@@ -40,10 +40,10 @@ namespace tic_tac_toe
             {
                 int totalCells = GameConstants.NUMBER_OF_ROWS * GameConstants.NUMBER_OF_COLUMNS;
 
-                if (GridPosition >= 1 && GridPosition <= totalCells) // used to make sure that the entry selection remains inbounds to the Grid array
+                if (GridPosition >= GameConstants.LOW && GridPosition <= totalCells) // used to make sure that the entry selection remains inbounds to the Grid array
                 {
-                    int rows = (GridPosition - 1) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
-                    int cols = (GridPosition - 1) % GameConstants.NUMBER_OF_COLUMNS;
+                    int rows = (GridPosition - GameConstants.LOW) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
+                    int cols = (GridPosition - GameConstants.LOW) % GameConstants.NUMBER_OF_COLUMNS;
                     return (rows, cols);
                 }
 
@@ -127,8 +127,8 @@ namespace tic_tac_toe
                     }
                 }
                 if (allMatched)
+
                 {
-                    Console.WriteLine("The player has won"); // testing purposes:works when matched 
                     return true;
                 }
             }
@@ -148,13 +148,13 @@ namespace tic_tac_toe
                     break;
                 }
             }
+            
             if (allDiagonalMatch) // testing if this will work to follow the same format as "check for column wins
             {
                 return true;
             }
             return allDiagonalMatch;
         }
-
         public static bool CheckTopRightDiagonalWin(string[,] Grid)
         {
             string firstDiagValue = Grid[0, Grid.GetLength(1) - 1]; // top-right element 
@@ -174,28 +174,6 @@ namespace tic_tac_toe
             }
             return allDiagMatch;
         }
-
-        //------------------ WinCheck ------------------
-        public static bool CheckingForGameWin(string winnerSymbol)
-        {
-
-            if (winnerSymbol == GameConstants.PLAYERCHOICE_X)
-            {
-                Console.WriteLine($"{winnerSymbol} has won");
-                return true;
-            }
-            if (winnerSymbol == GameConstants.PLAYERCHOICE_O)
-            {
-                Console.WriteLine($"{winnerSymbol} has won");
-                return true;
-            }
-
-            Console.WriteLine("The game is a Tie");
-            return false;// if there are no winnner
-        }
-
-        // this method checks for win
-
 
         public static bool CheckForWin(string[,] Grid, string decidePlayerSymbol)
         {
@@ -217,13 +195,7 @@ namespace tic_tac_toe
                     }
                 }
             }
-
-            Console.WriteLine("The Game is a Tie");
             return true; // grid is full
         }
     }
 }
-
-
-
-

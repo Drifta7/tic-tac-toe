@@ -26,7 +26,7 @@ namespace tic_tac_toe
                 UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid); 
                 UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); 
 
-                isWin = Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol); //  Check win after User move 
+                isWin = Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol); //  Check for win after User move 
 
                 if (isWin)
                 {
@@ -53,7 +53,7 @@ namespace tic_tac_toe
                 if (isWin)
                 {
                     UiMethods.DisplaySymbolOfWinnerMessage(cpuMark);
-                    break; // this is for the while loop break
+                    break; 
                 }
 
                 if (hasAllTheSpacesBeenFilled) // might have to update
@@ -61,8 +61,13 @@ namespace tic_tac_toe
                     UiMethods.DisplayGameOverMessage();
                     break;
                 }
-            }
 
+                if (Logic.CheckingIfAllSpacesFilled(ticTacToeGrid))
+                {
+                    UiMethods.DisplayGameTieMessage();
+                }
+            }
+            
             UiMethods.PromptUserToClearScreen();
         }
     }
