@@ -40,13 +40,13 @@ namespace tic_tac_toe
 
         }
 
-        public static void DisplayUpdatedGameGrid(string[,] Grid)
+        public static void DisplayUpdatedGameGrid(string[,] grid)
         {
-            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            for (int rows = 0; rows < grid.GetLength(0); rows++)
             {
-                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                for (int cols = 0; cols < grid.GetLength(1); cols++)
                 {
-                    Console.Write($" {Grid[rows, cols]} ");
+                    Console.Write($" {grid[rows, cols]} ");
                 }
                 Console.WriteLine();
             }
@@ -59,10 +59,10 @@ namespace tic_tac_toe
             return userInput;
         }
 
-        public static string DisplaySymbolOfWinnerMessage(string WinnerSymbol)
+        public static string DisplaySymbolOfWinnerMessage(string winnerSymbol)
         {
-            Console.WriteLine($"{WinnerSymbol} is the winner");
-            return WinnerSymbol;
+            Console.WriteLine($"{winnerSymbol} is the winner");
+            return winnerSymbol;
         }
 
         // this will check what the user has put into the entry and will let the user know if valid or not

@@ -5,17 +5,17 @@ namespace tic_tac_toe
     class Logic
     {
 
-        public static void PlacingCpuMarkOnGrid(string[,] Grid, string CpuMark)
+        public static void PlacingCpuMarkOnGrid(string[,] grid, string cpuMark)
         {
             bool isGridMarked = false;
 
-            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            for (int rows = 0; rows < grid.GetLength(0); rows++)
             {
-                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                for (int cols = 0; cols < grid.GetLength(1); cols++)
                 {
-                    if (Grid[rows, cols] == " _ ")
+                    if (grid[rows, cols] == " _ ")
                     {
-                        Grid[rows, cols] = CpuMark;
+                        grid[rows, cols] = cpuMark;
                         isGridMarked = true;
                         //Console.WriteLine($"DEBUG: CPU placed: {CpuMark} at ({rows},{cols})");
                         break; // so that it breaks out the loop when placed 
@@ -36,14 +36,14 @@ namespace tic_tac_toe
         // this will make the Grid dynamic by not hard coding the elements and user selecting where to put their mark
         public static (int, int) MapPostionToGrid(string position)
         {
-            if (int.TryParse(position, out int GridPosition))
+            if (int.TryParse(position, out int gridPosition))
             {
                 int totalCells = GameConstants.NUMBER_OF_ROWS * GameConstants.NUMBER_OF_COLUMNS;
 
-                if (GridPosition >= GameConstants.LOW && GridPosition <= totalCells) // used to make sure that the entry selection remains inbounds to the Grid array
+                if (gridPosition >= GameConstants.LOW && gridPosition <= totalCells) // used to make sure that the entry selection remains inbounds to the Grid array
                 {
-                    int rows = (GridPosition - GameConstants.LOW) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
-                    int cols = (GridPosition - GameConstants.LOW) % GameConstants.NUMBER_OF_COLUMNS;
+                    int rows = (gridPosition - GameConstants.LOW) / GameConstants.NUMBER_OF_ROWS; // the -1 is for the offset of the grid
+                    int cols = (gridPosition - GameConstants.LOW) % GameConstants.NUMBER_OF_COLUMNS;
                     return (rows, cols);
                 }
 
@@ -60,29 +60,29 @@ namespace tic_tac_toe
         }
 
         /////////////////////////////////Checks for Player Or Cpu Position///////////////////////////////////////
-        public static bool CheckForRowWin(string[,] Grid)
+        public static bool CheckForRowWin(string[,] grid)
         {
-            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            for (int rows = 0; rows < grid.GetLength(0); rows++)
             {
-                string checkPlayerMarkMatch = Grid[rows, 0]; // this checks the 1st element of the rows
+                string checkPlayerMarkMatch = grid[rows, 0]; // this checks the 1st element of the rows
 
                 if (checkPlayerMarkMatch == " _ ") // Ensures that it's not an empty space
                 {
                     continue;
                 }
 
-                bool PlayerAllRowMatch = true;
+                bool playerAllRowMatch = true;
 
-                for (int cols = 1; cols < Grid.GetLength(1); cols++) // starts at 1 and not at the first element
+                for (int cols = 1; cols < grid.GetLength(1); cols++) // starts at 1 and not at the first element
                 {
-                    if (Grid[rows, cols] != checkPlayerMarkMatch)
+                    if (grid[rows, cols] != checkPlayerMarkMatch)
                     {
-                        PlayerAllRowMatch = false;
+                        playerAllRowMatch = false;
                         break;
                     }
                 }
 
-                if (PlayerAllRowMatch) //if PLayerAllMatch is true it then calls the method
+                if (playerAllRowMatch) //if PLayerAllMatch is true it then calls the method
                 {
                     return true; // stop checking further rows since the game is already won.
                 }
@@ -90,37 +90,37 @@ namespace tic_tac_toe
             return false;
         }
 
-        public static bool CheckForCenterLineWin(string[,] Grid)
+        public static bool CheckForCenterLineWin(string[,] grid)
         {
-            string firstCenterValue = Grid[1, 0];
-            bool CenterArrayMatches = true;
+            string firstCenterValue = grid[1, 0];
+            bool centerArrayMatches = true;
 
             if (firstCenterValue == " _ ")
             {
                 return false;
             }
 
-            for (int i = 1; i < Grid.GetLength(1); i++)
+            for (int i = 1; i < grid.GetLength(1); i++)
             {
-                if (Grid[1, i] != firstCenterValue)
+                if (grid[1, i] != firstCenterValue)
                 {
-                    CenterArrayMatches = false;
+                    centerArrayMatches = false;
                     break;
                 }
             }
-            return CenterArrayMatches; // returns true if all elements in the center line match
+            return centerArrayMatches; // returns true if all elements in the center line match
         }
 
-        public static bool CheckForColumnsWin(string[,] Grid)
+        public static bool CheckForColumnsWin(string[,] grid)
         {
-            for (int cols = 0; cols < Grid.GetLength(1); cols++)
+            for (int cols = 0; cols < grid.GetLength(1); cols++)
             {
-                string checkEqualNUmbers = Grid[0, cols];// the first element to compare to
+                string checkEqualNUmbers = grid[0, cols];// the first element to compare to
                 bool allMatched = true;
 
-                for (int rows = 0; rows < Grid.GetLength(0); rows++)
+                for (int rows = 0; rows < grid.GetLength(0); rows++)
                 {
-                    if (Grid[rows, cols] != checkEqualNUmbers || checkEqualNUmbers == " _ ")
+                    if (grid[rows, cols] != checkEqualNUmbers || checkEqualNUmbers == " _ ")
                     {
                         allMatched = false;
                         break;
@@ -135,14 +135,14 @@ namespace tic_tac_toe
             return false;
         }
 
-        public static bool CheckForTopLeftDiagonalWin(string[,] Grid)
+        public static bool CheckForTopLeftDiagonalWin(string[,] grid)
         {
-            string firstDiagonalValue = Grid[0, 0];
+            string firstDiagonalValue = grid[0, 0];
             bool allDiagonalMatch = true;
 
-            for (int i = 0; i < Grid.GetLength(0); i++)
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
-                if (Grid[i, i] != firstDiagonalValue || firstDiagonalValue == " _ ")
+                if (grid[i, i] != firstDiagonalValue || firstDiagonalValue == " _ ")
                 {
                     allDiagonalMatch = false;
                     break;
@@ -155,14 +155,14 @@ namespace tic_tac_toe
             }
             return allDiagonalMatch;
         }
-        public static bool CheckTopRightDiagonalWin(string[,] Grid)
+        public static bool CheckTopRightDiagonalWin(string[,] grid)
         {
-            string firstDiagValue = Grid[0, Grid.GetLength(1) - 1]; // top-right element 
+            string firstDiagValue = grid[0, grid.GetLength(1) - 1]; // top-right element 
             bool allDiagMatch = true;
 
-            for (int i = 0; i < Grid.GetLength(0); i++)// loop through diagonal
+            for (int i = 0; i < grid.GetLength(0); i++)// loop through diagonal
             {
-                if (Grid[i, Grid.GetLength(1) - 1 - i] != firstDiagValue || firstDiagValue == " _ ")
+                if (grid[i, grid.GetLength(1) - 1 - i] != firstDiagValue || firstDiagValue == " _ ")
                 {
                     allDiagMatch = false;
                     break;
@@ -175,7 +175,7 @@ namespace tic_tac_toe
             return allDiagMatch;
         }
 
-        public static bool CheckForWin(string[,] Grid, string decidePlayerSymbol)
+        public static bool CheckForWin(string[,] Grid)
         {
             return CheckForRowWin(Grid) || CheckForColumnsWin(Grid) || CheckForTopLeftDiagonalWin(Grid)
                     || CheckTopRightDiagonalWin(Grid) || CheckForCenterLineWin(Grid);
@@ -183,13 +183,13 @@ namespace tic_tac_toe
 
         // The method checks if all the spaces are filled and the is not declared winner 
         // this will be set to false during the game, when it becomes true then the game will restart with no winners 
-        public static bool CheckingIfAllSpacesFilled(string[,] Grid) // will be used for a the Program "while" loop
+        public static bool CheckingIfAllSpacesFilled(string[,] grid) // will be used for a the Program "while" loop
         {
-            for (int rows = 0; rows < Grid.GetLength(0); rows++)
+            for (int rows = 0; rows < grid.GetLength(0); rows++)
             {
-                for (int cols = 0; cols < Grid.GetLength(1); cols++)
+                for (int cols = 0; cols < grid.GetLength(1); cols++)
                 {
-                    if (Grid[rows, cols] != GameConstants.PLAYERCHOICE_O && Grid[rows, cols] != GameConstants.PLAYERCHOICE_X) // checks to see if the grid is filled with x's and o's
+                    if (grid[rows, cols] != GameConstants.PLAYERCHOICE_O && grid[rows, cols] != GameConstants.PLAYERCHOICE_X) // checks to see if the grid is filled with x's and o's
                     {
                         return false; // found and empty space grid not full yet
                     }

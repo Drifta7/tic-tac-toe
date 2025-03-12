@@ -16,7 +16,7 @@ namespace tic_tac_toe
             string cpuMark; // used for save for cpu mark for DecidePlayersymbol.
             string decidePlayerSymbol = UiMethods.DecidePlayerSymbol(out cpuMark); // stores the Symbol selection in a variable, and will select opposite of player choice
 
-            bool isWin = Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol);
+            bool isWin = Logic.CheckForWin(ticTacToeGrid);
 
             UiMethods.DisplayTicTacToeGrid(ticTacToeGrid); // this displays the grid (as a blank) 
 
@@ -26,13 +26,14 @@ namespace tic_tac_toe
                 UiMethods.PlacingUserMarkIntoGrid(decidePlayerSymbol, ticTacToeGrid); 
                 UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); 
 
-                isWin = Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol); //  Check for win after User move 
+                isWin = Logic.CheckForWin(ticTacToeGrid); //  Check for win after User move 
 
                 if (isWin)
                 {
                     UiMethods.DisplaySymbolOfWinnerMessage(decidePlayerSymbol);
                     break;
                 }
+               
                 hasAllTheSpacesBeenFilled = Logic.CheckingIfAllSpacesFilled(ticTacToeGrid);
                 if (hasAllTheSpacesBeenFilled)
                 {
@@ -46,9 +47,9 @@ namespace tic_tac_toe
                 Logic.PlacingCpuMarkOnGrid(ticTacToeGrid, cpuMark); 
                 UiMethods.DisplayUpdatedGameGrid(ticTacToeGrid); 
 
-                Logic.CheckForWin(ticTacToeGrid, decidePlayerSymbol);
+                Logic.CheckForWin(ticTacToeGrid);
 
-                isWin = Logic.CheckForWin(ticTacToeGrid, cpuMark); // check for wins after CPU move
+                isWin = Logic.CheckForWin(ticTacToeGrid); // check for wins after CPU move
 
                 if (isWin)
                 {
